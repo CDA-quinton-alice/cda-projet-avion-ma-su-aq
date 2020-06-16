@@ -11,10 +11,11 @@ public class Player {
 	private static int posY;
 	private int width;
 	private int height;
-	private Image sprite;
-	private Image explosion;
+	private static Image sprite;
+	private static Image explosion;
 	private static Player INSTANCE = null;
 	private static boolean alive;
+	private static int vies;
 	
 	private Player() {
 		URL url = getClass().getResource("/_ressources/xwing.png");
@@ -22,7 +23,8 @@ public class Player {
 		Image tmp;
 		posX = 250;
 		posY = 250;
-		alive = false;
+		alive = true;
+		vies = 5;
 		
 		try {
 			tmp = ImageIO.read(url);
@@ -57,17 +59,29 @@ public class Player {
 		return height;
 	}
 	
-	public boolean isAlive() {
+	public static boolean isAlive() {
 		return alive;
 	}
 
-	public Image getSprite() {
+	public static int getVies() {
+		return vies;
+	}
+	
+	public static void isHit() {
+		vies--;
+		if(vies==0) {
+			setAlive(false);
+		}
+	}
+	
+	public static Image getSprite() {
 		if(alive) {
 			return sprite;
 		}else{
 			return explosion;
 		}
 	}
+	
 	public static void setAlive(boolean pAlive) {
 		alive = pAlive;
 	}

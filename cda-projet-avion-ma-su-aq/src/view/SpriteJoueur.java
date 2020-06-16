@@ -1,11 +1,13 @@
 package view;
 
+import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Graphics;
 import java.awt.Image;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 
+import javax.swing.BorderFactory;
 import javax.swing.JPanel;
 
 import model.Player;
@@ -30,6 +32,15 @@ public class SpriteJoueur extends JPanel implements KeyListener{
 		this.addKeyListener(this);
 	}
 	
+	public boolean playerDead() {
+		if(!Player.isAlive()) {
+			sprite = Player.getSprite();
+			this.removeKeyListener(this);
+			this.repaint();
+			return true;
+		}
+		return false;
+	}
 	
 	@Override
 	protected void paintComponent(Graphics g) {
@@ -49,41 +60,43 @@ public class SpriteJoueur extends JPanel implements KeyListener{
 
 	@Override
 	public void keyPressed(KeyEvent e) {
-		int keyCode = e.getKeyCode();
-		
-		switch(keyCode) {
-		case KeyEvent.VK_UP:
-			if(Player.getPosY()<9) {
-				Player.setPosY(0);
-			}else {
-				Player.setPosY(Player.getPosY()-10);
+		if(!playerDead()) {
+			int keyCode = e.getKeyCode();
+			
+			switch(keyCode) {
+			case KeyEvent.VK_UP:
+				if(Player.getPosY() == 0) {
+					Player.isHit();
+				}else {
+					Player.setPosY(Player.getPosY()-10);
+				}
+				break;
+			case KeyEvent.VK_DOWN:
+				if(Player.getPosY()>=520) {
+					Player.setPosY(520);
+				}else {
+					Player.setPosY(Player.getPosY()+10);
+				}
+				break;
+			case KeyEvent.VK_LEFT:
+				if(Player.getPosX()<9) {
+					Player.setPosX(0);
+				}else {
+					Player.setPosX(Player.getPosX()-10);
+				}
+				break;
+			case KeyEvent.VK_RIGHT:
+				if(Player.getPosX()>=740) {
+					Player.setPosX(740);
+				}else {
+					Player.setPosX(Player.getPosX()+10);
+				}
+				break;
 			}
-			break;
-		case KeyEvent.VK_DOWN:
-			if(Player.getPosY()>=520) {
-				Player.setPosY(520);
-			}else {
-				Player.setPosY(Player.getPosY()+10);
-			}
-			break;
-		case KeyEvent.VK_LEFT:
-			if(Player.getPosX()<9) {
-				Player.setPosX(0);
-			}else {
-				Player.setPosX(Player.getPosX()-10);
-			}
-			break;
-		case KeyEvent.VK_RIGHT:
-			if(Player.getPosX()>=740) {
-				Player.setPosX(740);
-			}else {
-				Player.setPosX(Player.getPosX()+10);
-			}
-			break;
+			this.x = Player.getPosX();
+			this.y = Player.getPosY();
+			this.repaint();
 		}
-		this.x = Player.getPosX();
-		this.y = Player.getPosY();
-		this.repaint();
 	}
 
 
