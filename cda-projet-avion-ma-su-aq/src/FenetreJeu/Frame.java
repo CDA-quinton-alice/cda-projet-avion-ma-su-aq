@@ -2,8 +2,11 @@ package FenetreJeu;
 
 import java.awt.BorderLayout;
 import java.awt.Container;
+import java.awt.Image;
 import java.awt.Panel;
+import java.net.URL;
 
+import javax.imageio.ImageIO;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 
@@ -13,8 +16,19 @@ import view.SpriteJoueur;
 
 
 public class Frame extends JFrame {
-
+	private Image fondGalaxie;
 	public Frame (String JeuBattleFront) {
+		super("Frame");
+		Image fondGalaxie = null;
+		URL urlGalaxie = getClass().getResource("/_ressources/galaxie.jpg");
+		try {
+			fondGalaxie = ImageIO.read(urlGalaxie); // parce que l'image fondGalaxie ici = à l'urlGalaxie déjà déclarée au dessus
+			fondGalaxie = fondGalaxie.getScaledInstance(1200, 700, Image.SCALE_SMOOTH);
+		} catch(Exception e) {
+			System.out.println(e.getMessage());
+		}
+		
+		
 		setTitle(JeuBattleFront);
 		setSize(1200,700);// largeur, hauteur en px 
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -28,10 +42,12 @@ public class Frame extends JFrame {
 		Player joueur = Player.getInstance();
 		SpriteJoueur cocaJoueur = new SpriteJoueur(joueur.getSprite(),joueur.getPosX(),joueur.getPosY(), joueur.getWidth(), joueur.getHeight());
 		conteneur.add(cocaJoueur);
+		setContentPane(new ContentPane(fondGalaxie));
+		
 		setVisible(true);
 	}
 	
 	public static void main(String[] args) {
-		new Frame("bonjour");
+		new Frame("Dans une galaxie lointaine, très lointaine...");
 	}
 }
