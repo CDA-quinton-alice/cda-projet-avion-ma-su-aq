@@ -11,6 +11,7 @@ import javax.swing.JPanel;
 import model.Player;
 
 public class SpriteJoueur extends JPanel implements KeyListener{
+	
 	private Image sprite;
 	private int x;
 	private int y;

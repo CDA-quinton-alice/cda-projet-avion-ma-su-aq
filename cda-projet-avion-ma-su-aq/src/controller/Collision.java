@@ -2,9 +2,12 @@ package controller;
 
 import java.awt.Rectangle;
 
+import model.Meteorite;
+import model.Player;
+
 public class Collision {
 	
-	public static boolean checkCollision(Rectangle r1, Rectangle r2) {
-		return r1.intersects(r2);
+	public static boolean checkCollision(Meteorite m) {
+		return Player.getInstance().getBounds().intersects(m.getBounds());
 	}
 }
