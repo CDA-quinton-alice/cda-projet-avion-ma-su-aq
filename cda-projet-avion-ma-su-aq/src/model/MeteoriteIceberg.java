@@ -1,19 +1,43 @@
 package model;
 
+import java.awt.Image;
 import java.awt.Rectangle;
 
-public class MeteoriteIceberg extends Meteorite {
+import javax.swing.ImageIcon;
 
+public class MeteoriteIceberg extends Meteorite {
+ // possède la même image, la même vitesse et la même hauteur que Météorite de Glace
+	// mais on double la largeur et les dégâts 
+	// le score s'incrémente de 5 lorsque l'avion en évite une
+	
+	// dégâts 4
+	// vitesse 10
+	// largeur 150
+	// hauteur 75
+	
+	private ImageIcon icoMI;
+	private Image imgMI;
+	
+	public MeteoriteIceberg(int pPositionX, int pPositionY) {
+		super("Météoroïde Iceberg", 4, 10, pPositionX, pPositionY, 150, 75);
+		this.icoMI = new ImageIcon(getClass().getResource("/_ressources/meteoroideGlaceCutCourtetRotateSansFond.gif"));
+		this.icoMI.getImage();
+		
+	}
+	
 	@Override
 	public void move() {
-		// TODO Auto-generated method stub
+		// this.setPositionX(this.positionX + this.vitesse);
+		this.setPositionY(this.positionY+this.vitesse); // // de la même vitesse que Météoroïde de glace & Météoroïde simple
 		
 	}
 
 	@Override
 	public Rectangle getBounds() {
-		// TODO Auto-generated method stub
-		return null;
+		Rectangle vRectangle4 = new Rectangle(this.positionX, this.positionY, this.largeur, this.hauteur);
+		return vRectangle4;
 	}
-
+	public Image getIMgMI() {
+		return imgMI;
+	}
 }
