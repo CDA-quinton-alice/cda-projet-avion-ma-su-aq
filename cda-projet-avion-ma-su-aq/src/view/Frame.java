@@ -1,52 +1,63 @@
 package view;
 
 import java.awt.BorderLayout;
-import java.awt.Container;
+import java.awt.Dimension;
+import java.awt.Graphics;
 import java.awt.Image;
-import java.awt.Panel;
 import java.net.URL;
 
 import javax.imageio.ImageIO;
+import javax.swing.ImageIcon;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JLayeredPane;
 
 import model.Player;
 
+public class Frame extends JLayeredPane {
 
-
-public class Frame extends JFrame {
 	private Image fondGalaxie;
-	public Frame (String JeuBattleFront) {
-		super("Frame");
+
+	public Frame(String JeuBattleFront) {
 		Image fondGalaxie = null;
 		URL urlGalaxie = getClass().getResource("/_ressources/galaxie.jpg");
 		try {
-			fondGalaxie = ImageIO.read(urlGalaxie); // parce que l'image fondGalaxie ici = à l'urlGalaxie déjà déclarée au dessus
+			fondGalaxie = ImageIO.read(urlGalaxie); // parce que l'image fondGalaxie ici = à l'urlGalaxie déjà déclarée
+													// au dessus
 			fondGalaxie = fondGalaxie.getScaledInstance(1200, 700, Image.SCALE_SMOOTH);
-		} catch(Exception e) {
+		} catch (Exception e) {
 			System.out.println(e.getMessage());
 		}
 		
+		this.setPreferredSize(new Dimension(1200,700));
 		
-		setTitle(JeuBattleFront);
-		setSize(1200,700);// largeur, hauteur en px 
-		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setResizable(false);// du coup on peut pas redimensionner la fenêtre et pas tout casser le jeu gniark gniark
-		setLocationRelativeTo(null);//afficher la fenêtre au milieu de l'écran actif au lancement
-		Panel p = new Panel();
-		p.add(new JLabel("Battlefront"));
-		getContentPane().add(p);// ajouter un nouveau panel/ paneau après avoir importé Panel qui hérite de JPanel
-		Container conteneur = this.getContentPane();
-		conteneur.setLayout(new BorderLayout(10,10));
+		ContentPane p = new ContentPane(fondGalaxie);
+		p.setSize(this.getPreferredSize());
+		
 		Player joueur = Player.getInstance();
-		SpriteJoueur cocaJoueur = new SpriteJoueur(joueur.getSprite(),joueur.getPosX(),joueur.getPosY(), joueur.getWidth(), joueur.getHeight());
-		conteneur.add(cocaJoueur);
-		setContentPane(new ContentPane(fondGalaxie));
+		SpriteJoueur cocaJoueur = new SpriteJoueur(Player.getSprite(), Player.getPosX(), Player.getPosY(),joueur.getWidth(), joueur.getHeight());
+		cocaJoueur.setOpaque(false);
+		cocaJoueur.setSize(this.getPreferredSize());
 		
-		setVisible(true);
+		
+		
+		
+		this.add(p,JLayeredPane.DEFAULT_LAYER);
+		this.add(cocaJoueur,JLayeredPane.PALETTE_LAYER);
+
+		
+		
+		JFrame frame = new JFrame(JeuBattleFront);
+		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		frame.getContentPane().add(this);
+		frame.pack();
+		frame.setLocationByPlatform(true);
+		frame.setVisible(true);
 	}
 	
+	
+	
 	public static void main(String[] args) {
-		new Frame("Dans une galaxie lointaine, très lointaine...");
+		new Frame("BattleFront");
 	}
 }
