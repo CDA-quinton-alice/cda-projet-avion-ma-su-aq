@@ -39,6 +39,11 @@ public abstract class Meteorite {
 			this.imgM = this.icoM.getImage();
 			break;
 
+		case "GLACE":
+			this.icoM = new ImageIcon(getClass().getResource("/_ressources/meteoroideGlaceCutCourtetRotateSansFond.gif"));
+			this.imgM = this.icoM.getImage();
+			break;
+			
 		default:
 			break;
 		}

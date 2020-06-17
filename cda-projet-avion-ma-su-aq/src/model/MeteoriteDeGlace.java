@@ -20,7 +20,7 @@ public class MeteoriteDeGlace extends Meteorite {
 	private Image imgMG;
 	
 	public MeteoriteDeGlace(int pPositionX, int pPositionY) {
-		super("Météroïde de Glace", 2, 10, pPositionX, pPositionY, 75, 75);
+		super("GLACE", 2, 10, pPositionX, pPositionY, 75, 75);
 		this.icoMG = new ImageIcon(getClass().getResource("/_ressources/meteoroideGlaceCutCourtetRotateSansFond.gif"));
 		this.imgMG = this.icoMG.getImage();
 	}
