@@ -2,13 +2,11 @@ package model;
 
 import java.awt.Image;
 import java.awt.Rectangle;
-import java.io.IOException;
-import java.net.URL;
 
-import javax.imageio.ImageIO;
 import javax.swing.ImageIcon;
 
-public class MeteoriteSimple {
+public class MeteoriteSimple extends Meteorite {
+	private String nom;
 	private int degats;
 	private int vitesse;
 	private int largeur;
@@ -20,12 +18,8 @@ public class MeteoriteSimple {
 	private int positionX;
 	private int positionY;
 
-	public MeteoriteSimple(int positionX, int positionY) {
-		this.vitesse = 3;
-		this.largeur = 30;
-		this.hauteur = 30;
-		this.positionX = positionX;
-		this.positionY = positionY;
+	public MeteoriteSimple(int pPositionX, int pPositionY) {
+		super("Météore Simple", 1, 10, pPositionX, pPositionY, 30, 30);
 		this.icoMS = new ImageIcon(getClass().getResource("/_ressources/ms.gif"));
 		this.imgMS = this.icoMS.getImage();
 	}
@@ -34,7 +28,7 @@ public class MeteoriteSimple {
 		// Meteor simple --> déplacement sur Y seulement
 //		this.setPositionX(this.positionX + VITESSE);
 		this.setPositionY(this.positionY + this.vitesse);
-		
+
 	}
 
 	public Rectangle getBounds() {
@@ -68,6 +62,10 @@ public class MeteoriteSimple {
 
 	public int getHauteur() {
 		return this.hauteur;
+	}
+
+	public int getDegats() {
+		return degats;
 	}
 
 }

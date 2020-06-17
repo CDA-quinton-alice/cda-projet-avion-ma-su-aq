@@ -1,9 +1,6 @@
 package model;
 
-import java.awt.Image;
 import java.awt.Rectangle;
-
-import javax.swing.ImageIcon;
 
 public abstract class Meteorite {
 
@@ -12,26 +9,17 @@ public abstract class Meteorite {
 	protected int vitesse;
 	protected int positionX;
 	protected int positionY;
-	protected  int largeur;
-	protected  int hauteur;
-	
-	protected String strImage;
-	protected ImageIcon icoMeteor;
-	protected Image imgMeteor;
+	protected int largeur;
+	protected int hauteur;
 
-	public Meteorite(String nom, Image pImg, int degat, int vitesse, int positionX, int positionY, int largeur,
-			int hauteur) {
-		this.nom = nom;
-		this.degat = degat;
-		this.vitesse = vitesse;
-		this.positionX = positionX;
-		this.positionY = positionY;
-		this.largeur = largeur;
-		this.hauteur = hauteur;
-		
-		this.icoMeteor = new ImageIcon(getClass().getResource(this.strImage));
-		this.imgMeteor = this.icoMeteor.getImage();
-		
+	public Meteorite(String pNom, int pDegat, int pVitesse, int pPositionX, int pPositionY, int pLargeur, int pHauteur) {
+		this.nom = pNom;
+		this.degat = pDegat;
+		this.vitesse = pVitesse;
+		this.positionX = pPositionX;
+		this.positionY = pPositionY;
+		this.largeur = pLargeur;
+		this.hauteur = pHauteur;
 
 	}
 
@@ -65,10 +53,6 @@ public abstract class Meteorite {
 
 	public int getHauteur() {
 		return hauteur;
-	}
-
-	public Image getImg() {
-		return imgMeteor;
 	}
 
 }
