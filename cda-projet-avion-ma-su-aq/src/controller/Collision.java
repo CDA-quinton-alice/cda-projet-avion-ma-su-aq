@@ -1,9 +1,7 @@
 package controller;
 
-import java.awt.Rectangle;
 import java.util.ArrayList;
 
-import model.Meteorite;
 import model.MeteoriteSimple;
 import model.Player;
 
