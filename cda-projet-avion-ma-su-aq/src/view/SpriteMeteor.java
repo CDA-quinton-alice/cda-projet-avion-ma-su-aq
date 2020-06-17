@@ -6,30 +6,48 @@ import java.awt.Graphics;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 
+import model.Meteorite;
 import model.MeteoriteSimple;
 
 public class SpriteMeteor extends JPanel {
 
-//	private Image imgMeteorSimple;
+	private MeteoriteSimple m;
 	private int positionX;
 	private int positionY;
 	private int width;
 	private int height;
 
 	// Test avec meteor simple
-	public SpriteMeteor(MeteoriteSimple pMS) {
-		this.positionX = pMS.getPositionX();
-		this.positionY = pMS.getPositionY();
-		this.width = MeteoriteSimple.getLargeur();
-		this.height = MeteoriteSimple.getHauteur();
-		this.setPreferredSize(new Dimension(this.width, this.height));
-		this.setSize(new Dimension(this.width, this.height));
-	}
+//	public SpriteMeteor(MeteoriteSimple pMeteor) {
+//		this.positionX = pMeteor.getPositionX();
+//		this.positionY = pMeteor.getPositionY();
+//		this.width = pMeteor.getLargeur();
+//		this.height = pMeteor.getHauteur();
+//		
+//		//Redimensionner le JPanel ??
+//		this.setPreferredSize(new Dimension(this.width, this.height));
+//		this.setSize(new Dimension(this.width, this.height));
+//	}
 
+	public SpriteMeteor() {
+
+	this.m = new MeteoriteSimple(200 , 200);
+	
+	this.setFocusable(true);
+	this.requestFocusInWindow();
+	
+	
+	}
+	
+	private void deplacementMeteor(Graphics g ) {
+		
+	}
+	
+	
 	@Override
 	protected void paintComponent(Graphics g) {
 		super.paintComponent(g);
-		g.drawImage(MeteoriteSimple.getImgMS(), positionX, positionY, this);
+		g.drawImage(m.getImgMS(), positionX, positionY, this);
 	}
 
 	public static void main(String[] args) {
@@ -40,9 +58,9 @@ public class SpriteMeteor extends JPanel {
 		fenetre.setSize(800, 600);
 		fenetre.setLocationRelativeTo(null);
 
-		JPanel pan = new SpriteMeteor(new MeteoriteSimple(100, 0));
+//		JPanel pan = new SpriteMeteor(new MeteoriteSimple(100, 0));
 //		pan.setBackground(Color.green);
-		fenetre.getContentPane().add(pan);
+//		fenetre.getContentPane().add(pan);
 
 		
 		

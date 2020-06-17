@@ -6,43 +6,44 @@ import java.io.IOException;
 import java.net.URL;
 
 import javax.imageio.ImageIO;
+import javax.swing.ImageIcon;
 
-public class MeteoriteSimple extends Meteorite {
-	private static Image imgMS;
-	private static final String NOM = "Metéorite Simple";
-	private static final int DEGATS = 1;
-	private static final int VITESSE = 10;
-	private static final int LARGEUR = 50;
-	private static final int HAUTEUR = 50;
+public class MeteoriteSimple {
+	private  int degats;
+	private  int vitesse;
+	private  int largeur;
+	private  int hauteur;
+
+	private ImageIcon icoMS;
+	private Image imgMS;
 
 	private int positionX;
 	private int positionY;
 
-	public MeteoriteSimple(int pPositionX, int pPoistionY) {
-		super(NOM, DEGATS, VITESSE, LARGEUR, HAUTEUR, pPositionX, pPoistionY);
-		URL url = getClass().getResource("/_ressources/meteor.gif");
-		Image tempo;
-		try {
-			tempo = ImageIO.read(url);
-			imgMS = tempo.getScaledInstance(LARGEUR, HAUTEUR, Image.SCALE_SMOOTH);
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		this.positionX = pPositionX;
-		this.positionY = pPoistionY;
+	
+	
+	
+	
+	
+	public MeteoriteSimple(int positionX, int positionY) {
+		this.largeur = 30;
+		this.hauteur = 30;
+		this.positionX = positionX;
+		this.positionY = positionY;
+		this.icoMS = new ImageIcon(getClass().getResource("/_ressources/ms.gif"));
+		this.imgMS = this.icoMS.getImage();
 	}
 
-	@Override
+	
+
 	void move() {
-		//Meteor simple --> déplacement sur Y seulement
+		// Meteor simple --> déplacement sur Y seulement
 //		this.setPositionX(this.positionX + VITESSE);
-		this.setPositionY(this.positionY + VITESSE);
+		this.setPositionY(this.positionY + this.vitesse);
 	}
 
-	@Override
 	public Rectangle getBounds() {
-		Rectangle vRectangle = new Rectangle(this.positionX, this.positionY, LARGEUR, HAUTEUR);
+		Rectangle vRectangle = new Rectangle(this.positionX, this.positionY, this.largeur, this.hauteur);
 		return vRectangle;
 	}
 
@@ -62,16 +63,16 @@ public class MeteoriteSimple extends Meteorite {
 		this.positionY = positionY;
 	}
 
-	public static Image getImgMS() {
+	public  Image getImgMS() {
 		return imgMS;
 	}
 
-	public static int getLargeur() {
-		return LARGEUR;
+	public int getLargeur() {
+		return this.largeur;
 	}
 
-	public static int getHauteur() {
-		return HAUTEUR;
+	public int getHauteur() {
+		return this.hauteur;
 	}
 
 }
