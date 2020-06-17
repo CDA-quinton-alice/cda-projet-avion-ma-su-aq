@@ -9,10 +9,10 @@ import javax.imageio.ImageIO;
 import javax.swing.ImageIcon;
 
 public class MeteoriteSimple {
-	private  int degats;
-	private  int vitesse;
-	private  int largeur;
-	private  int hauteur;
+	private int degats;
+	private int vitesse;
+	private int largeur;
+	private int hauteur;
 
 	private ImageIcon icoMS;
 	private Image imgMS;
@@ -20,12 +20,8 @@ public class MeteoriteSimple {
 	private int positionX;
 	private int positionY;
 
-	
-	
-	
-	
-	
 	public MeteoriteSimple(int positionX, int positionY) {
+		this.vitesse = 3;
 		this.largeur = 30;
 		this.hauteur = 30;
 		this.positionX = positionX;
@@ -34,12 +30,11 @@ public class MeteoriteSimple {
 		this.imgMS = this.icoMS.getImage();
 	}
 
-	
-
-	void move() {
+	public void move() {
 		// Meteor simple --> déplacement sur Y seulement
 //		this.setPositionX(this.positionX + VITESSE);
 		this.setPositionY(this.positionY + this.vitesse);
+		
 	}
 
 	public Rectangle getBounds() {
@@ -63,7 +58,7 @@ public class MeteoriteSimple {
 		this.positionY = positionY;
 	}
 
-	public  Image getImgMS() {
+	public Image getImgMS() {
 		return imgMS;
 	}
 
