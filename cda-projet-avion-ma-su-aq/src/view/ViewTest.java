@@ -64,7 +64,7 @@ public class ViewTest extends JFrame implements ActionListener{
 
 	@Override
 	public void actionPerformed(ActionEvent e) {
-		vies.setText("Vies : "+Player.getVies());
+		vies.setText("Vies : "+Player.getInstance().getVies().getVies());
 		List<Meteorite> meteores = new ArrayList<>();
 		
 		if(Player.isAlive()) {
