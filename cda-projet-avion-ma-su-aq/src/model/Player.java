@@ -16,6 +16,7 @@ public class Player {
 	private static Player INSTANCE = null;
 	private static boolean alive;
 	private static ObservableVies vies;
+	private static ObservablePoints points;
 	
 	private Player() {
 		URL url = getClass().getResource("/_ressources/xwing.png");
@@ -25,6 +26,7 @@ public class Player {
 		posY = 250;
 		alive = true;
 		vies = new ObservableVies();
+		points = new ObservablePoints();
 		this.width = 50;
 		this.height = 50;
 		try {
@@ -60,6 +62,10 @@ public class Player {
 		return height;
 	}
 	
+	public ObservablePoints getPoints() {
+		return points;
+	}
+
 	public static boolean isAlive() {
 		return alive;
 	}
@@ -74,6 +80,11 @@ public class Player {
 		if(vies.isDead()) {
 			setAlive(false);
 		}
+	}
+	
+	public static void addPoints(Meteorite m) {
+		System.out.println("DES POINTS !");
+		points.addPoints(m);
 	}
 	
 	public static Image getSprite() {

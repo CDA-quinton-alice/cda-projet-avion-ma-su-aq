@@ -47,23 +47,28 @@ public class Frame extends JLayeredPane {
 		//Vies
 		ViewVies vv = ViewVies.getInstance();
 		vv.setForeground(Color.WHITE);
-		JPanel vies = new JPanel();
-		vies.setOpaque(false);
-		vies.add(vv);
-		vies.setSize(100,50);
+		JPanel infos = new JPanel();
+		infos.setLayout(new BorderLayout());
+		infos.setOpaque(false);
+		infos.add(vv, BorderLayout.WEST);
+		infos.setSize(WIDTH,20);
 		
+		//Points
+		ViewPoints vp = ViewPoints.getInstance();
+		vp.setForeground(Color.WHITE);
+		infos.add(vp, BorderLayout.EAST);
 		
 		
 		//Ajout des panel
 		this.add(p,JLayeredPane.DEFAULT_LAYER);
 		this.add(cocaJoueur,JLayeredPane.PALETTE_LAYER);
-		this.add(vies, JLayeredPane.MODAL_LAYER);
-
+		this.add(infos, JLayeredPane.MODAL_LAYER);
 		
 		
 		JFrame frame = new JFrame(JeuBattleFront);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.getContentPane().add(this);
+		frame.setResizable(false);
 		frame.pack();
 		frame.setLocationByPlatform(true);
 		frame.setVisible(true);

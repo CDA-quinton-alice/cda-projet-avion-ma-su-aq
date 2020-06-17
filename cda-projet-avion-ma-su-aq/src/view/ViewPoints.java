@@ -5,14 +5,20 @@ import java.util.Observer;
 
 import javax.swing.JLabel;
 
+import model.ObservablePoints;
+import model.ObservableVies;
+import model.Player;
+
 
 public class ViewPoints extends JLabel implements Observer{
 	public static ViewPoints INSTANCE = null;
 	
 	private ViewPoints() {
-		
+		super("Points : "+0);
+		setName("points");
 	}
-	public ViewPoints getInstance() {
+	
+	public static ViewPoints getInstance() {
 		if(INSTANCE == null) {
 			INSTANCE = new ViewPoints();
 		}
@@ -21,8 +27,9 @@ public class ViewPoints extends JLabel implements Observer{
 	
 	@Override
 	public void update(Observable o, Object arg) {
-		// TODO Auto-generated method stub
-		
+		if(o instanceof ObservablePoints) {
+			this.setText("Points : "+Player.getInstance().getPoints().getPoints());
+		}
 	}
 
 	

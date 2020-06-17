@@ -18,8 +18,8 @@ public class Collision {
 		
 		for(MeteoriteSimple m : meteorites) {
 			if(m.getBounds().intersects(Player.getInstance().getBounds())) {
-				//Player.isHirt(m.getDamages());
 				Player.isHit(1);
+				Player.addPoints(m);
 				meteorites.remove(m);
 				return true; 
 			}
