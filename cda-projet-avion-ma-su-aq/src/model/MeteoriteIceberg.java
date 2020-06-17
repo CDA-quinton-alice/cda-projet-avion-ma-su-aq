@@ -8,12 +8,13 @@ import javax.swing.ImageIcon;
 public class MeteoriteIceberg extends Meteorite {
  // possède la même image, la même vitesse et la même hauteur que Météorite de Glace
 	// mais on double la largeur et les dégâts 
-	// le score s'incrémente de 5 lorsque l'avion en évite une
 	
 	// dégâts 4
 	// vitesse 10
 	// largeur 150
 	// hauteur 75
+	
+	// // score incrémenté de 5 lorsque l'avion arrive à en éviter une sans entrer en colision avec
 	
 	private ImageIcon icoMI;
 	private Image imgMI;

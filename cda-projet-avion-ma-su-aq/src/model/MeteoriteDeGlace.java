@@ -16,6 +16,8 @@ public class MeteoriteDeGlace extends Meteorite {
 	// largeur 75
 	// hauteur 75
 	
+	// score incrémenté de 3 lorsque l'avion arrive à en éviter une sans entrer en colision avec
+	
 	private ImageIcon icoMG;
 	private Image imgMG;
 	

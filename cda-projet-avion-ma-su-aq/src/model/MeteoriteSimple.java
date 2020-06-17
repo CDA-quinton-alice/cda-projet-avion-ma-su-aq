@@ -8,7 +8,9 @@ public class MeteoriteSimple extends Meteorite {
 		super("SIMPLE", 1, 10, pPositionX, pPositionY, 30, 30);
 
 	}
-
+	
+	// score incrémenté de 2 lorsque l'avion arrive à en éviter une sans entrer en colision avec
+	
 	public void move() {
 		// Meteor simple --> déplacement sur Y seulement
 //		this.setPositionX(this.positionX + VITESSE);

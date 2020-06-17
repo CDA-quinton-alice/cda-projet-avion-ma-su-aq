@@ -20,7 +20,7 @@ public class MeteoriteDeFeu extends Meteorite {
 	// largeur 100
 	// hauteur 100 
 	
-
+	// // score incrémenté d'1 lorsque l'avion arrive à en éviter une sans entrer en colision avec
 
 	public MeteoriteDeFeu(int pPositionX, int pPositionY) {
 		super("Feu", 2, 5,pPositionX, pPositionY, 100, 100);
