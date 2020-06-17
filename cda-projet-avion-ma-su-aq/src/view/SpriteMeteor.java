@@ -10,11 +10,12 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.Timer;
 
+import model.Meteorite;
 import model.MeteoriteSimple;
 
 public class SpriteMeteor extends JPanel implements ActionListener {
 
-	private MeteoriteSimple m;
+	private Meteorite m;
 	private int positionX;
 	private int positionY;
 	private int width;
@@ -22,7 +23,7 @@ public class SpriteMeteor extends JPanel implements ActionListener {
 	private Random rd = new Random();
 
 	// Test avec meteor simple
-	public SpriteMeteor(MeteoriteSimple pMS) {
+	public SpriteMeteor(Meteorite pMS) {
 		this.m = pMS;
 		this.positionX = pMS.getPositionX();
 		this.positionY = pMS.getPositionY();
@@ -37,7 +38,7 @@ public class SpriteMeteor extends JPanel implements ActionListener {
 	@Override
 	protected void paintComponent(Graphics g) {
 		super.paintComponent(g);
-		g.drawImage(m.getImgMS(), m.getPositionX(), m.getPositionY(), this);
+		g.drawImage(m.getImgM(), m.getPositionX(), m.getPositionY(), this);
 	}
 
 	public static void main(String[] args) {
