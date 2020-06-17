@@ -6,17 +6,9 @@ import java.awt.Rectangle;
 import javax.swing.ImageIcon;
 
 public class MeteoriteSimple extends Meteorite {
-	private String nom;
-	private int degats;
-	private int vitesse;
-	private int largeur;
-	private int hauteur;
 
 	private ImageIcon icoMS;
 	private Image imgMS;
-
-	private int positionX;
-	private int positionY;
 
 	public MeteoriteSimple(int pPositionX, int pPositionY) {
 		super("Météore Simple", 1, 10, pPositionX, pPositionY, 30, 30);
@@ -36,36 +28,8 @@ public class MeteoriteSimple extends Meteorite {
 		return vRectangle;
 	}
 
-	public int getPositionX() {
-		return positionX;
-	}
-
-	public void setPositionX(int positionX) {
-		this.positionX = positionX;
-	}
-
-	public int getPositionY() {
-		return positionY;
-	}
-
-	public void setPositionY(int positionY) {
-		this.positionY = positionY;
-	}
-
 	public Image getImgMS() {
 		return imgMS;
-	}
-
-	public int getLargeur() {
-		return this.largeur;
-	}
-
-	public int getHauteur() {
-		return this.hauteur;
-	}
-
-	public int getDegats() {
-		return degats;
 	}
 
 }

@@ -55,4 +55,32 @@ public abstract class Meteorite {
 		return hauteur;
 	}
 
+	public void setNom(String nom) {
+		this.nom = nom;
+	}
+
+	public void setDegat(int degat) {
+		this.degat = degat;
+	}
+
+	public void setVitesse(int vitesse) {
+		this.vitesse = vitesse;
+	}
+
+	public void setPositionX(int positionX) {
+		this.positionX = positionX;
+	}
+
+	public void setPositionY(int positionY) {
+		this.positionY = positionY;
+	}
+
+	public void setLargeur(int largeur) {
+		this.largeur = largeur;
+	}
+
+	public void setHauteur(int hauteur) {
+		this.hauteur = hauteur;
+	}
+
 }
