@@ -1,6 +1,7 @@
 package view;
 
 import java.awt.BorderLayout;
+import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Graphics;
 import java.awt.Image;
@@ -11,6 +12,7 @@ import javax.swing.ImageIcon;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JLayeredPane;
+import javax.swing.JPanel;
 
 import model.Player;
 
@@ -39,11 +41,17 @@ public class Frame extends JLayeredPane {
 		cocaJoueur.setOpaque(false);
 		cocaJoueur.setSize(this.getPreferredSize());
 		
-		
+		ViewVies vv = ViewVies.getInstance();
+		vv.setForeground(Color.WHITE);
+		JPanel vies = new JPanel();
+		vies.setOpaque(false);
+		vies.add(vv);
+		vies.setSize(100,50);
 		
 		
 		this.add(p,JLayeredPane.DEFAULT_LAYER);
 		this.add(cocaJoueur,JLayeredPane.PALETTE_LAYER);
+		this.add(vies, JLayeredPane.MODAL_LAYER);
 
 		
 		

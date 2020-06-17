@@ -95,7 +95,6 @@ public class SpriteJoueur extends JPanel implements KeyListener{
 				}
 				break;
 			}
-			System.out.println(this.x+" "+this.y);
 			this.x = Player.getPosX();
 			this.y = Player.getPosY();
 			this.repaint();

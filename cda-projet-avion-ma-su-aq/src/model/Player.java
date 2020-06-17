@@ -15,7 +15,7 @@ public class Player {
 	private static Image explosion;
 	private static Player INSTANCE = null;
 	private static boolean alive;
-	private static int vies;
+	private static ObservableVies vies;
 	
 	private Player() {
 		URL url = getClass().getResource("/_ressources/xwing.png");
@@ -24,7 +24,7 @@ public class Player {
 		posX = 250;
 		posY = 250;
 		alive = true;
-		vies = 5;
+		vies = new ObservableVies();
 		
 		try {
 			tmp = ImageIO.read(url);
@@ -63,13 +63,13 @@ public class Player {
 		return alive;
 	}
 
-	public static int getVies() {
+	public ObservableVies getVies() {
 		return vies;
 	}
 	
 	public static void isHit() {
-		vies--;
-		if(vies==0) {
+		vies.getHit();
+		if(vies.isDead()) {
 			setAlive(false);
 		}
 	}
