@@ -22,7 +22,7 @@ public class MeteoriteDeFeu extends Meteorite {
 	private int positionY;
 
 	public MeteoriteDeFeu(int pPositionX, int pPositionY) {
-		super(nom,imgMF ,degats, vitesse, largeur, hauteur, pPositionX, pPositionY);
+		super();
 		URL urlMeteFeu = getClass().getResource("/_ressources/meteoroideDeFeuSansFond.gif");
 		Image meteoroideFeu;
 		try {
