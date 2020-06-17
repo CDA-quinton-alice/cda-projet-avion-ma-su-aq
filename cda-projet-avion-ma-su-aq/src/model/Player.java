@@ -7,6 +7,7 @@ import java.net.URL;
 import javax.imageio.ImageIO;
 
 public class Player {
+	private static String name;
 	private static int posX;
 	private static int posY;
 	private int width;
@@ -46,6 +47,12 @@ public class Player {
 		return INSTANCE;
 	}
 	
+	
+	
+	public static String getName() {
+		return name;
+	}
+
 	public static int getPosX() {
 		return posX;
 	}
@@ -105,6 +112,10 @@ public class Player {
 
 	public static void setPosY(int pY) {
 		posY = pY;
+	}
+
+	public static void setName(String name) {
+		Player.name = name;
 	}
 
 	public Rectangle getBounds() {
