@@ -32,7 +32,7 @@ public class SpriteJoueur extends JPanel implements KeyListener{
 		this.y = pY;
 		this.width = pWidth;
 		this.height = pHeight;
-		this.setPreferredSize(new Dimension(this.width, this.height));
+		this.setPreferredSize(new Dimension(Frame.WIDTH, Frame.HEIGHT));
 		this.setFocusable(true);
 		this.addKeyListener(this);
 	}
@@ -80,8 +80,8 @@ public class SpriteJoueur extends JPanel implements KeyListener{
 				}
 				break;
 			case KeyEvent.VK_DOWN:
-				if(Player.getPosY()>=520) {
-					Player.setPosY(520);
+				if(Player.getPosY()>=Frame.HEIGHT-60) {
+					Player.setPosY(Frame.HEIGHT-60);
 				}else {
 					Player.setPosY(Player.getPosY()+10);
 				}
@@ -94,8 +94,8 @@ public class SpriteJoueur extends JPanel implements KeyListener{
 				}
 				break;
 			case KeyEvent.VK_RIGHT:
-				if(Player.getPosX()>=740) {
-					Player.setPosX(740);
+				if(Player.getPosX()>=Frame.WIDTH-60) {
+					Player.setPosX(Frame.WIDTH-60);
 				}else {
 					Player.setPosX(Player.getPosX()+10);
 				}

@@ -19,6 +19,8 @@ import model.Player;
 public class Frame extends JLayeredPane {
 
 	private Image fondGalaxie;
+	public static final int WIDTH = 1200;
+	public static final int HEIGHT = 700;
 
 	public Frame(String JeuBattleFront) {
 		Image fondGalaxie = null;
@@ -26,7 +28,7 @@ public class Frame extends JLayeredPane {
 		try {
 			fondGalaxie = ImageIO.read(urlGalaxie); // parce que l'image fondGalaxie ici = à l'urlGalaxie déjà déclarée
 													// au dessus
-			fondGalaxie = fondGalaxie.getScaledInstance(1200, 700, Image.SCALE_SMOOTH);
+			fondGalaxie = fondGalaxie.getScaledInstance(WIDTH, HEIGHT, Image.SCALE_SMOOTH);
 		} catch (Exception e) {
 			System.out.println(e.getMessage());
 		}
@@ -69,6 +71,9 @@ public class Frame extends JLayeredPane {
 	
 	
 	
+
+
+
 	public static void main(String[] args) {
 		new Frame("BattleFront");
 	}
