@@ -1,13 +1,29 @@
 package controller;
 
-import java.awt.Rectangle;
+import java.util.ArrayList;
 
-import model.Meteorite;
+import model.MeteoriteSimple;
 import model.Player;
 
 public class Collision {
 	
-	public static boolean checkCollision(Meteorite m) {
-		return Player.getInstance().getBounds().intersects(m.getBounds());
+	private static ArrayList<MeteoriteSimple> test = new ArrayList<MeteoriteSimple>() {
+		{
+			add(new MeteoriteSimple(10,10));
+		}
+	};
+
+	public static boolean checkCollision() {
+		ArrayList<MeteoriteSimple> meteorites = test;
+		
+		for(MeteoriteSimple m : meteorites) {
+			if(m.getBounds().intersects(Player.getInstance().getBounds())) {
+				Player.isHit(1);
+				Player.addPoints(m);
+				meteorites.remove(m);
+				return true; 
+			}
+		}
+		return false;
 	}
 }
