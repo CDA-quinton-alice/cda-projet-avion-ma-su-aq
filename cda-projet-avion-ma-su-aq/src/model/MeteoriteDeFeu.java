@@ -20,13 +20,11 @@ public class MeteoriteDeFeu extends Meteorite {
 	// largeur 100
 	// hauteur 100 
 	
-	private ImageIcon icoMF;
-	private Image imgMF;
+
 
 	public MeteoriteDeFeu(int pPositionX, int pPositionY) {
-		super("Météoroïde De Feu", 2, 5,pPositionX, pPositionY, 100, 100);
-	this.icoMF = new ImageIcon(getClass().getResource("/_ressources/meteoroideDeFeuSansFond.gif"));
-	this.imgMF = this.icoMF.getImage();
+		super("Feu", 2, 5,pPositionX, pPositionY, 100, 100);
+	
 	}
 
 	@Override
@@ -41,8 +39,6 @@ public class MeteoriteDeFeu extends Meteorite {
 		Rectangle vRectangle2 = new Rectangle(this.positionX, this.positionY, this.largeur, this.hauteur);
 		return vRectangle2;
 	}
-	public Image getImgMF() {
-		return imgMF;
-	}
+
 	
 }
