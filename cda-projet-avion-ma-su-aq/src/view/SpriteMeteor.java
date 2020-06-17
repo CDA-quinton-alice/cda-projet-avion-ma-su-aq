@@ -2,14 +2,17 @@ package view;
 
 import java.awt.Dimension;
 import java.awt.Graphics;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 import javax.swing.JFrame;
 import javax.swing.JPanel;
+import javax.swing.Timer;
 
 import model.Meteorite;
 import model.MeteoriteSimple;
 
-public class SpriteMeteor extends JPanel {
+public class SpriteMeteor extends JPanel implements ActionListener{
 
 	private MeteoriteSimple m;
 	private int positionX;
@@ -18,25 +21,14 @@ public class SpriteMeteor extends JPanel {
 	private int height;
 
 	// Test avec meteor simple
-//	public SpriteMeteor(MeteoriteSimple pMeteor) {
-//		this.positionX = pMeteor.getPositionX();
-//		this.positionY = pMeteor.getPositionY();
-//		this.width = pMeteor.getLargeur();
-//		this.height = pMeteor.getHauteur();
-//		
-//		//Redimensionner le JPanel ??
-//		this.setPreferredSize(new Dimension(this.width, this.height));
-//		this.setSize(new Dimension(this.width, this.height));
-//	}
-
-	public SpriteMeteor() {
-
-	this.m = new MeteoriteSimple(200 , 200);
-	
-	this.setFocusable(true);
-	this.requestFocusInWindow();
-	
-	
+	public SpriteMeteor(MeteoriteSimple pMS) {
+		this.positionX = pMS.getPositionX();
+		this.positionY = pMS.getPositionY();
+		this.width = MeteoriteSimple.getLargeur();
+		this.height = MeteoriteSimple.getHauteur();
+		this.setPreferredSize(new Dimension(this.width, this.height));
+		this.setSize(new Dimension(this.width, this.height));
+		Timer t = new Timer(500,this);
 	}
 	
 	private void deplacementMeteor(Graphics g ) {
@@ -65,6 +57,11 @@ public class SpriteMeteor extends JPanel {
 		
 		
 		fenetre.setVisible(true);
+	}
+
+	@Override
+	public void actionPerformed(ActionEvent e) {
+		
 	}
 
 }
