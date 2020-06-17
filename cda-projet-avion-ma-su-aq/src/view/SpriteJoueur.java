@@ -4,14 +4,18 @@ import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Graphics;
 import java.awt.Image;
+import java.awt.Rectangle;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
+import java.util.ArrayList;
 
 import javax.swing.BorderFactory;
 import javax.swing.ImageIcon;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
+import controller.Collision;
+import model.Meteorite;
 import model.Player;
 
 public class SpriteJoueur extends JPanel implements KeyListener{
@@ -21,7 +25,6 @@ public class SpriteJoueur extends JPanel implements KeyListener{
 	private int y;
 	private int width;
 	private int height;
-	
 	
 	public SpriteJoueur(Image pSprite, int pX, int pY, int pWidth, int pHeight) {
 		this.sprite = pSprite;
@@ -55,20 +58,23 @@ public class SpriteJoueur extends JPanel implements KeyListener{
 
 	@Override
 	public void keyTyped(KeyEvent e) {
-		// TODO Auto-generated method stub
-		
 	}
 
 
 	@Override
 	public void keyPressed(KeyEvent e) {
 		if(!playerDead()) {
+			System.out.println(Player.getInstance().getBounds());
+			
+			Collision.checkCollision();
+			
 			int keyCode = e.getKeyCode();
 			
 			switch(keyCode) {
 			case KeyEvent.VK_UP:
 				if(Player.getPosY() == 0) {
-					Player.isHit();
+//					Player.setPosY(0);
+					Player.isHit(1);
 				}else {
 					Player.setPosY(Player.getPosY()-10);
 				}

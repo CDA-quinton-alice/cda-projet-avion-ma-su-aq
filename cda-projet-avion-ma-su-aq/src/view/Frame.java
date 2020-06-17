@@ -36,11 +36,13 @@ public class Frame extends JLayeredPane {
 		ContentPane p = new ContentPane(fondGalaxie);
 		p.setSize(this.getPreferredSize());
 		
+		//Player
 		Player joueur = Player.getInstance();
 		SpriteJoueur cocaJoueur = new SpriteJoueur(Player.getSprite(), Player.getPosX(), Player.getPosY(),joueur.getWidth(), joueur.getHeight());
 		cocaJoueur.setOpaque(false);
 		cocaJoueur.setSize(this.getPreferredSize());
 		
+		//Vies
 		ViewVies vv = ViewVies.getInstance();
 		vv.setForeground(Color.WHITE);
 		JPanel vies = new JPanel();
@@ -49,6 +51,8 @@ public class Frame extends JLayeredPane {
 		vies.setSize(100,50);
 		
 		
+		
+		//Ajout des panel
 		this.add(p,JLayeredPane.DEFAULT_LAYER);
 		this.add(cocaJoueur,JLayeredPane.PALETTE_LAYER);
 		this.add(vies, JLayeredPane.MODAL_LAYER);

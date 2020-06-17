@@ -23,7 +23,7 @@ public abstract class Meteorite {
 
 	}
 
-	abstract void move();
+	public abstract void move();
 
 	public abstract Rectangle getBounds();
 

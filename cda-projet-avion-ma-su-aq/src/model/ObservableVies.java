@@ -12,8 +12,8 @@ public class ObservableVies extends Observable{
 		this.vies = 5;
 	}
 	
-	public void getHit() {
-		vies--;
+	public void getHit(int i) {
+		vies -= i;
 		setChanged();
 		notifyObservers();
 	}

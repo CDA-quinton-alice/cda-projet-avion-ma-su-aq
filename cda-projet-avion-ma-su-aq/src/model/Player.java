@@ -25,7 +25,8 @@ public class Player {
 		posY = 250;
 		alive = true;
 		vies = new ObservableVies();
-		
+		this.width = 50;
+		this.height = 50;
 		try {
 			tmp = ImageIO.read(url);
 			sprite = tmp.getScaledInstance(50, 50, Image.SCALE_SMOOTH); 
@@ -67,8 +68,9 @@ public class Player {
 		return vies;
 	}
 	
-	public static void isHit() {
-		vies.getHit();
+	public static void isHit(int i) {
+		System.out.println("TOUCHE !");
+		vies.getHit(i);
 		if(vies.isDead()) {
 			setAlive(false);
 		}
