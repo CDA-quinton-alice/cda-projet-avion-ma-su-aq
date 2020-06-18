@@ -18,7 +18,7 @@ public class MeteoriteZigZag extends Meteorite {
 	
 	// score incrémenté de 5 lorsque l'avion arrive à en éviter une sans entrer en colision avec 
 	
-	
+	boolean zig;
 	private ImageIcon icoMZZ;
 	private Image imgMZZ;
 	
@@ -31,11 +31,17 @@ public class MeteoriteZigZag extends Meteorite {
 
 	@Override
 	public void move() {
-		boolean gauche = false; 
-		if (gauche == true) {
-				this.setPositionX(this.positionX+this.vitesse);
-		} else {
-			this.setPositionY(this.positionY+this.vitesse);
+		//this.setPositionX(this.positionX+this.vitesse);
+		//this.setPositionY(this.positionY+this.vitesse);
+		
+		if (zig) { // ça veut dire si zig est vrai 
+			this.setPositionX((this.positionX+10)+this.vitesse);
+			this.setPositionY((this.positionY+10)+this.vitesse);
+			zig = false; // on change la valeur à chaque fois qu'on entre 
+		} else { 
+		this.setPositionX((this.positionX-10)+this.vitesse);
+		this.setPositionY((this.positionY+10)+this.vitesse);
+		zig = true; // on change la valeur à chaque fois qu'on entre
 		}
 	 // même vitesse que météoroïde de feu
 		
