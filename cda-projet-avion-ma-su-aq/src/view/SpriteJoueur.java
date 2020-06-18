@@ -37,7 +37,7 @@ public class SpriteJoueur extends JPanel implements KeyListener{
 		this.addKeyListener(this);
 	}
 	
-	public boolean playerDead() {
+	public boolean playerDead() { // ajouter l'ouverture de choix de la fin ici ? 
 		if(!Player.isAlive()) {
 			sprite = Player.getSprite();
 			this.removeKeyListener(this);
