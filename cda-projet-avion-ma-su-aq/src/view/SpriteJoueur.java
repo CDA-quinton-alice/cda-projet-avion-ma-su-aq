@@ -32,9 +32,12 @@ public class SpriteJoueur extends JPanel implements KeyListener{
 		this.y = pY;
 		this.width = pWidth;
 		this.height = pHeight;
-		this.setPreferredSize(new Dimension(Frame.WIDTH, Frame.HEIGHT));
+		this.setOpaque(false);
+		this.setPreferredSize(new Dimension(50,50));
+		this.setSize(50,50);
 		this.setFocusable(true);
 		this.addKeyListener(this);
+		this.setBounds(this.getBounds());
 	}
 	
 	public boolean playerDead() {

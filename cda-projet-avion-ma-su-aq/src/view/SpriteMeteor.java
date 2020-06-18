@@ -25,14 +25,22 @@ public class SpriteMeteor extends JPanel implements ActionListener {
 	// Test avec meteor simple
 	public SpriteMeteor(Meteorite pMS) {
 		this.m = pMS;
+		this.setOpaque(false);
 		this.positionX = pMS.getPositionX();
 		this.positionY = pMS.getPositionY();
 		this.width = pMS.getLargeur();
 		this.height = pMS.getHauteur();
-		this.setPreferredSize(new Dimension(this.width, this.height));
 		this.setSize(new Dimension(this.width, this.height));
 		Timer t = new Timer(20, this);
 		t.start();
+	}
+
+	public Meteorite getM() {
+		return m;
+	}
+	
+	public void setM(Meteorite pM) {
+		this.m = pM;
 	}
 
 	@Override
@@ -59,7 +67,7 @@ public class SpriteMeteor extends JPanel implements ActionListener {
 	public void actionPerformed(ActionEvent e) {
 		m.move();
 		this.repaint();
-		System.out.println("TIC ");
+//		System.out.println("TIC ");
 	}
 
 }

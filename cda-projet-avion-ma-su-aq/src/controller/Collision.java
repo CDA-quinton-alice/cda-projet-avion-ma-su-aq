@@ -2,6 +2,7 @@ package controller;
 
 import java.util.ArrayList;
 
+import model.Meteorite;
 import model.MeteoriteSimple;
 import model.Player;
 
@@ -23,6 +24,15 @@ public class Collision {
 				meteorites.remove(m);
 				return true; 
 			}
+		}
+		return false;
+	}
+	
+	public static boolean checkCollision(Meteorite m) {
+		if(m.getBounds().intersects(Player.getInstance().getBounds())) {
+			Player.isHit(1);
+			Player.addPoints(m);
+			return true; 
 		}
 		return false;
 	}
