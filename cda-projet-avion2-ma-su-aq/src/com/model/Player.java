@@ -7,6 +7,7 @@ import java.net.URL;
 import javax.imageio.ImageIO;
 import javax.swing.JOptionPane;
 
+import com.view.AvionPanel;
 import com.view.CdaFenetre;
 import com.view.CentrePanel;
 
@@ -16,13 +17,13 @@ public class Player {
 	private static int posY;
 	private int width;
 	private int height;
+	private static AvionPanel avion;
 	private static Player INSTANCE = null;
 	private static boolean alive;
 	private static ObservableVies vies;
 	private static ObservablePoints points;
 	
 	private Player() {
-		Image tmp;
 		posX = 250;
 		posY = 250;
 		alive = true;
@@ -95,6 +96,7 @@ public class Player {
 	public static void reset() {
 		vies.reset();
 		points.reset();
+		avion.reset();
 	}
 	
 	public static void addPoints(Meteorite m) {
@@ -119,5 +121,10 @@ public class Player {
 
 	public Rectangle getBounds() {
 		return new Rectangle(posX,posY,width,height);
+	}
+
+	public void addAvion(AvionPanel a1) {
+		avion = a1;
+		
 	}
 }

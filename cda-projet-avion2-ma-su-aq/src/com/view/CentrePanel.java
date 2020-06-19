@@ -54,6 +54,7 @@ public class CentrePanel extends JPanel {
 
 		AvionPanel a1 = new AvionPanel();
 		a1.setLocation((width / 2) - (a1.getWidth() / 2), heigth - a1.getHeight());
+		Player.getInstance().addAvion(a1);
 		this.add(a1);
 
 		a1.setFocusable(true);

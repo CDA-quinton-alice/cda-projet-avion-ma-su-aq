@@ -60,6 +60,8 @@ public class AvionPanel extends JPanel {
 		AvionPanel.height = height;
 	}
 
-	
+	public void reset() {
+		this.setLocation((CentrePanel.getLargeur() / 2) - (this.getWidth() / 2), CentrePanel.getHauteur() - this.getHeight());
+	}
 	
 }
