@@ -1,17 +1,32 @@
 package com.model;
 
 import java.awt.Image;
+import java.awt.Insets;
 import java.awt.Rectangle;
+import java.awt.Window;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
+import java.awt.event.WindowListener;
+import java.io.BufferedReader;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
 import java.io.IOException;
 import java.net.URL;
 import javax.imageio.ImageIO;
+import javax.swing.BoxLayout;
+import javax.swing.JDialog;
+import javax.swing.JFrame;
+import javax.swing.JLabel;
 import javax.swing.JOptionPane;
+import javax.swing.JPanel;
+import javax.swing.border.EmptyBorder;
 
 import com.view.AvionPanel;
 import com.view.CdaFenetre;
 import com.view.CentrePanel;
 
 public class Player {
+	private static boolean menu = true;
 	private static String name;
 	private static int posX;
 	private static int posY;
@@ -77,22 +92,54 @@ public class Player {
 	public static void isHit(int i) {
 		vies.getHit(i);
 		if(vies.isDead()) {
-			setAlive(false);
-			JOptionPane d = new JOptionPane();
-			String lesTextes[] = {"Recommencer","Voir les scores","Quitter"};
-			int retour = d.showOptionDialog(null,"Vous avez perdu", "Avion v2", JOptionPane.DEFAULT_OPTION, JOptionPane.ERROR_MESSAGE,null,lesTextes,lesTextes[0]);
-			
-			if(retour == 0) {
-				reset();
-			}else if(retour == 1) {
-				//Voir les scores
-				
-			}else {
-				System.exit(0);
-			}
+			menuEnd();
+			setAlive(false);			
 		}
 	}
 	
+	public static void menuEnd() {
+		JOptionPane d = new JOptionPane();
+		String lesTextes[] = {"Recommencer","Voir les scores","Quitter"};
+		int retour = d.showOptionDialog(null,"Vous avez perdu", "Avion v2", JOptionPane.DEFAULT_OPTION, JOptionPane.QUESTION_MESSAGE,null,lesTextes,lesTextes[0]);
+		
+		if(retour == 0) {
+			reset();
+			menu = false;
+		}else if(retour == 1) {
+			JFrame tableauScore = new JFrame();
+			tableauScore.setSize(50,70);
+			tableauScore.setLocation(CdaFenetre.getInstance().getX(), CdaFenetre.getInstance().getY());
+			tableauScore.setTitle("Tableau des scores");
+			JPanel panel  = new JPanel();
+			panel.setLayout(new BoxLayout(panel, BoxLayout.Y_AXIS));
+			panel.setBorder(new EmptyBorder(new Insets(50,70,50,70)));
+			
+			JDialog jd = new JDialog();
+			
+			for(String s : CdaFenetre.getScores()) {
+				String str = s.split(";")[0]+" "+s.split(";")[1]+s.split(";")[2];
+				panel.add(new JLabel(str));
+			}
+			
+			tableauScore.addWindowListener(new WindowAdapter() {
+
+				@Override
+				public void windowClosing(WindowEvent arg0) {
+					((Window) arg0.getComponent()).dispose();
+					menuEnd();
+				}
+				
+			});
+			tableauScore.add(panel);
+			tableauScore.pack();
+			tableauScore.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+			tableauScore.setVisible(true);
+			
+		}else if(retour == 2) {
+			menu = false;
+			System.exit(0);
+		}
+	}
 	public static void reset() {
 		vies.reset();
 		points.reset();

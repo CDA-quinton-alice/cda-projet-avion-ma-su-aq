@@ -40,7 +40,9 @@ public class CentrePanel extends JPanel {
 
 		Random vRandom = new Random();
 
+		//Il me faut un type commun à tous les pannels, interface vide ?
 		MeteoriteSimplePanel m1 = new MeteoriteSimplePanel(5);
+		
 		this.add(m1);
 
 		MeteoriteFeuPanel m2 = new MeteoriteFeuPanel(2);
@@ -60,6 +62,9 @@ public class CentrePanel extends JPanel {
 		a1.setFocusable(true);
 
 		listThreads.add(new Thread(new Runnable() {
+			//ici gérer avec instanceof le type choisis par le random de la classe metéore
+			//et instancier en fonction
+			//gros copier coller moche sur les autres threads
 			public void run() {
 				while (true) {
 					m1.setLocation(m1.getX(), (m1.getY() + m1.getVitesseDeplacement()) % heigth);
@@ -136,7 +141,7 @@ public class CentrePanel extends JPanel {
 						if(!Player.isAlive()) {
 							m4.reset();
 						}
-						//Arr�ter --> pop up fin game
+						//Arr�ter --> pop up fin game
 					}
 					m4.repaint();
 					try {

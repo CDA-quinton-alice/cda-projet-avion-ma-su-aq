@@ -1,20 +1,16 @@
 package com.view;
 
 import java.awt.BorderLayout;
-import java.awt.Image;
+import java.awt.Container;
 import java.io.BufferedReader;
-import java.io.BufferedWriter;
 import java.io.File;
-import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
-import java.net.URL;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 
-import javax.imageio.ImageIO;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 
@@ -22,9 +18,9 @@ import com.model.Player;
 
 public class CdaFenetre extends JFrame {
 
-	private File listeScore;
+	private static File listeScore;
 	private static CdaFenetre INSTANCE;
-	private ArrayList<String> scores;
+	private static ArrayList<String> scores;
 	
 	private CdaFenetre() {
 		setupFichierScore();
@@ -58,6 +54,11 @@ public class CdaFenetre extends JFrame {
 		return INSTANCE;
 	}
 	
+	public static ArrayList<String> getScores() {
+		return scores;
+	}
+
+
 	private void setupFichierScore(){
 		scores = new ArrayList<>();
 		try {
