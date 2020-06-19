@@ -7,7 +7,7 @@ import javax.swing.JPanel;
 public class HautPanel extends JPanel {
 
 	public HautPanel() {
-		this.setBackground(Color.MAGENTA);
+//		this.setBackground(Color.MAGENTA);
 		
 	}
 
