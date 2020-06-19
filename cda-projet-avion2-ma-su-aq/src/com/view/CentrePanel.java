@@ -81,7 +81,7 @@ public class CentrePanel extends JPanel {
 					if (sontEnCollision(m1, a1)) {
 						Meteorite mm1 = (Meteorite) m1.getM();
 						Player.isHit(mm1.getDegat());
-						a1.setImgAvion(new ImageIcon(getClass().getResource("/_ressources/explosion.gif")).getImage());
+						a1.setImgAvion(new ImageIcon(getClass().getResource("/_ressources/exp.png")).getImage());
 						m1.reset();
 					}
 					m1.repaint();
@@ -108,7 +108,7 @@ public class CentrePanel extends JPanel {
 					if (sontEnCollision(m2, a1)) {
 						Meteorite mm2 = (Meteorite) m1.getM();
 						Player.isHit(mm2.getDegat());
-						a1.setImgAvion(new ImageIcon(getClass().getResource("/_ressources/explosion.gif")).getImage());
+						a1.setImgAvion(new ImageIcon(getClass().getResource("/_ressources/exp.png")).getImage());
 						m2.reset();
 					}
 					m2.repaint();
@@ -163,7 +163,7 @@ public class CentrePanel extends JPanel {
 						Meteorite mm4 = (Meteorite) m4.getM();
 						Player.isHit(mm4.getDegat());
 						m4.reset();
-						a1.setImgAvion(new ImageIcon(getClass().getResource("/_ressources/explosion.gif")).getImage());
+						a1.setImgAvion(new ImageIcon(getClass().getResource("/_ressources/exp.png")).getImage());
 					}
 					m4.repaint();
 					try {

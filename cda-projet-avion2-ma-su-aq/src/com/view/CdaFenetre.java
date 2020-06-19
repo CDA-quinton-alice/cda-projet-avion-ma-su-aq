@@ -27,9 +27,9 @@ public class CdaFenetre extends JFrame {
 		demanderNom();
 		
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		this.setSize(600, 800);
+		this.setSize(600, 840);
 		this.setLocationRelativeTo(null);
-		this.setTitle("titre");
+		this.setTitle("APOLLO CDA");
 
 		this.setResizable(false);
 		
