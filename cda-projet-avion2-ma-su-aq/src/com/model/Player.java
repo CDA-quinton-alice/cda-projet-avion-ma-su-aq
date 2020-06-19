@@ -102,6 +102,7 @@ public class Player {
 		int retour = d.showOptionDialog(null,"Vous avez perdu", "Avion v2", JOptionPane.DEFAULT_OPTION, JOptionPane.QUESTION_MESSAGE,null,lesTextes,lesTextes[0]);
 		
 		if(retour == 0) {
+			Player.setAlive(true);
 			reset();
 			menu = false;
 		}else if(retour == 1) {

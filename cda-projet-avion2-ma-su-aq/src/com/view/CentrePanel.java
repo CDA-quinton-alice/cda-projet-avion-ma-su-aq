@@ -76,31 +76,32 @@ public class CentrePanel extends JPanel {
 			//gros copier coller moche sur les autres threads
 			public void run() {
 				while (true) {
+					System.out.println(m1.getY()>heigth-m1.getVitesseDeplacement());
 					if(m1.getY()>heigth-m1.getVitesseDeplacement()) {
-						EnumMeteor em = ControllerMeteor.randomMeteor();
-						switch(em) {
-						case NORMALE:
-							System.out.println("NORMAL");
-							m1 = new MeteoriteSimplePanel(new Random().nextInt(5));
-							break;
-						case FEU:
-							System.out.println("FEU");
-							m1 = new MeteoriteFeuPanel(new Random().nextInt(5));
-							break;
-						case ICE:
-							System.out.println("ICE");
-							m1 = new MeteoriteFeuPanel(new Random().nextInt(5));
-							break;
-						case GLACE:
-							System.out.println("GLACE");
-							m1 = new MeteoriteFeuPanel(new Random().nextInt(5));
-							break;
-						case ZIGZAG:
-							System.out.println("ZIGZAG");
-							m1 = new MeteoriteFeuPanel(new Random().nextInt(5));
-							break;
-						}
-						m1.repaint();
+						System.out.println("test");
+//						EnumMeteor em = ControllerMeteor.randomMeteor();
+//						switch(em) {
+//						case NORMALE:
+//							System.out.println("NORMAL");
+//							m1 = new MeteoriteSimplePanel(new Random().nextInt(5));
+//							break;
+//						case FEU:
+//							System.out.println("FEU");
+//							m1 = new MeteoriteFeuPanel(new Random().nextInt(5));
+//							break;
+//						case ICE:
+//							System.out.println("ICE");
+//							m1 = new MeteoriteFeuPanel(new Random().nextInt(5));
+//							break;
+//						case GLACE:
+//							System.out.println("GLACE");
+//							m1 = new MeteoriteFeuPanel(new Random().nextInt(5));
+//							break;
+//						case ZIGZAG:
+//							System.out.println("ZIGZAG");
+//							m1 = new MeteoriteFeuPanel(new Random().nextInt(5));
+//							break;
+//						}
 					}
 					m1.setLocation(m1.getX(), (m1.getY() + m1.getVitesseDeplacement()) % heigth);
 					if (sontEnCollision(m1, a1)) {
