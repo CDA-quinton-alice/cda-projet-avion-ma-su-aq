@@ -10,7 +10,7 @@ import javax.swing.JPanel;
 
 import com.model.MeteoriteSimple;
 
-public class MeteoriteSimplePanel extends JPanel {
+public class MeteoriteSimplePanel extends JPanel implements IMeteorite{
 
 	private final int vitesseDeplacement;
 	private ImageIcon icoMS;

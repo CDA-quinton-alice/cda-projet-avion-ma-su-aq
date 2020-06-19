@@ -14,6 +14,7 @@ import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
 import com.controller.Collision;
+import com.model.Meteorite;
 import com.model.Player;
 
 public class CentrePanel extends JPanel {
@@ -41,18 +42,18 @@ public class CentrePanel extends JPanel {
 		Random vRandom = new Random();
 
 		//Il me faut un type commun à tous les pannels, interface vide ?
-		MeteoriteSimplePanel m1 = new MeteoriteSimplePanel(5);
+		IMeteorite m1 = new MeteoriteSimplePanel(5);
 		
-		this.add(m1);
+		this.add((JPanel)m1);
 
-		MeteoriteFeuPanel m2 = new MeteoriteFeuPanel(2);
-		this.add(m2);
+		IMeteorite m2 = new MeteoriteFeuPanel(2);
+		this.add((JPanel)m2);
 
-		MeteoriteSimplePanel m3 = new MeteoriteSimplePanel(4);
-		this.add(m3);
+		IMeteorite m3 = new MeteoriteSimplePanel(4);
+		this.add((JPanel)m3);
 
-		MeteoriteSimplePanel m4 = new MeteoriteSimplePanel(3);
-		this.add(m4);
+		IMeteorite m4 = new MeteoriteSimplePanel(3);
+		this.add((JPanel)m4);
 
 		AvionPanel a1 = new AvionPanel();
 		a1.setLocation((width / 2) - (a1.getWidth() / 2), heigth - a1.getHeight());
@@ -69,11 +70,9 @@ public class CentrePanel extends JPanel {
 				while (true) {
 					m1.setLocation(m1.getX(), (m1.getY() + m1.getVitesseDeplacement()) % heigth);
 					if (sontEnCollision(m1, a1)) {
-						Player.isHit(m1.getM().getDegat());
-						Player.addPoints(m1.getM());
-						if(!Player.isAlive()) {
-							m1.reset();
-						}
+						Meteorite mm1 = (Meteorite) m1.getM();
+						Player.isHit(mm1.getDegat());
+						m1.reset();
 						a1.setImgAvion(new ImageIcon(getClass().getResource("/_ressources/explosion.gif")).getImage());
 					}
 
@@ -91,9 +90,12 @@ public class CentrePanel extends JPanel {
 			public void run() {
 				while (true) {
 					m2.setLocation(m2.getX(), (m2.getY() + m2.getVitesseDeplacement()) % heigth);
-//					if (sontEnCollision(m2, a1)) {
-//						a1.setIcoAvion(new ImageIcon(getClass().getResource("/_ressources/explosion.gif")));
-//					}
+					if (sontEnCollision(m2, a1)) {
+						Meteorite mm2 = (Meteorite) m2.getM();
+						Player.isHit(mm2.getDegat());
+						m2.reset();
+						a1.setIcoAvion(new ImageIcon(getClass().getResource("/_ressources/explosion.gif")));
+					}
 					
 					
 					m2.repaint();
@@ -105,18 +107,15 @@ public class CentrePanel extends JPanel {
 				}
 			}
 		}));
-
+//
 		listThreads.add(new Thread(new Runnable() {
 			public void run() {
 				while (true) {
 					m3.setLocation(m3.getX(), (m3.getY() + m3.getVitesseDeplacement()) % heigth);
 					if (sontEnCollision(m3, a1)) {
-						Player.isHit(m1.getM().getDegat());
-						Player.addPoints(m1.getM());
-
-						if(!Player.isAlive()) {
-							m3.reset();
-						}
+						Meteorite mm3 = (Meteorite) m3.getM();
+						Player.isHit(mm3.getDegat());
+						m3.reset();
 						a1.setImgAvion(new ImageIcon(getClass().getResource("/_ressources/explosion.gif")).getImage());
 					}
 					m3.repaint();
@@ -134,14 +133,10 @@ public class CentrePanel extends JPanel {
 				while (true) {
 					m4.setLocation(m4.getX(), (m4.getY() + m4.getVitesseDeplacement()) % heigth);
 					if (sontEnCollision(m4, a1)) {
-						Player.isHit(m1.getM().getDegat());
-						Player.addPoints(m1.getM());
-						a1.setImgAvion(new ImageIcon(getClass().getResource("/_ressources/explosion.gif")).getImage());
-
-						if(!Player.isAlive()) {
-							m4.reset();
-						}
-						//Arr�ter --> pop up fin game
+						Meteorite mm4 = (Meteorite) m4.getM();
+						Player.isHit(mm4.getDegat());
+						a1.setImgAvion(new ImageIcon(getClass().getResource("/_ressources/explosion.gif")).getImage());	
+						m4.reset();
 					}
 					m4.repaint();
 					try {
@@ -203,7 +198,7 @@ public class CentrePanel extends JPanel {
 		return listThreads;
 	}
 
-	private static boolean sontEnCollision(MeteoriteSimplePanel pMeteorite, AvionPanel pAvion) {
+	private static boolean sontEnCollision(IMeteorite pMeteorite, AvionPanel pAvion) {
 		Point mA = new Point(pMeteorite.getX(), pMeteorite.getY());
 		Point mB = new Point(pMeteorite.getX() + pMeteorite.getWidth(), pMeteorite.getY());
 		Point mC = new Point(pMeteorite.getX() + pMeteorite.getWidth(), pMeteorite.getY() + pMeteorite.getHeight());

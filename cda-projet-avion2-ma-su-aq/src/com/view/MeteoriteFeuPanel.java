@@ -11,7 +11,7 @@ import javax.swing.JPanel;
 import com.model.MeteoriteDeFeu;
 import com.model.MeteoriteSimple;
 
-public class MeteoriteFeuPanel extends JPanel {
+public class MeteoriteFeuPanel extends JPanel implements IMeteorite{
 
 	private final int vitesseDeplacement;
 	private ImageIcon icoMS;
@@ -52,5 +52,10 @@ public class MeteoriteFeuPanel extends JPanel {
 	protected void paintComponent(Graphics g) {
 		super.paintComponent(g);
 		g.drawImage(this.imgMS, 0, 0, null);
+	}
+
+	@Override
+	public MeteoriteDeFeu getM() {
+		return this.m;
 	}
 }
