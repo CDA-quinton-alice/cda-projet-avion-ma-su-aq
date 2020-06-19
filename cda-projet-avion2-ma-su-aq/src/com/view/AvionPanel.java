@@ -11,7 +11,7 @@ public class AvionPanel extends JPanel {
 
 	private ImageIcon icoAvion;
 	private Image imgAvion;
-	private static int width = 150;
+	private static int width = 89;
 	private static int height = 177;
 	
 	public AvionPanel() {

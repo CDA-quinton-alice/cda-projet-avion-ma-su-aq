@@ -136,7 +136,7 @@ public class CentrePanel extends JPanel {
 						Meteorite mm3 = (Meteorite) m3.getM();
 						Player.isHit(mm3.getDegat());
 						m3.reset();
-						a1.setImgAvion(new ImageIcon(getClass().getResource("/_ressources/explosion.gif")).getImage());
+						a1.setImgAvion(new ImageIcon(getClass().getResource("/_ressources/exp.png")).getImage());
 					}
 					m3.repaint();
 					try {
@@ -197,12 +197,12 @@ public class CentrePanel extends JPanel {
 						p.setPosY(a1.getY()+step);
 						p.setPosX(a1.getX());
 					} else if (e.getKeyCode() == KeyEvent.VK_RIGHT && a1.getX() < 580 - a1.getWidth()) {
-						a1.setImgAvion(new ImageIcon(getClass().getResource("/_ressources/usa32-R.png")).getImage());
+						a1.setImgAvion(new ImageIcon(getClass().getResource("/_ressources/usa-right.png")).getImage());
 						a1.setLocation(a1.getX() + step, a1.getY());
 						p.setPosY(a1.getY());
 						p.setPosX(a1.getX()+step);
 					} else if (e.getKeyCode() == KeyEvent.VK_LEFT && a1.getX() > 0) {
-						a1.setImgAvion(new ImageIcon(getClass().getResource("/_ressources/usa32-L.png")).getImage());
+						a1.setImgAvion(new ImageIcon(getClass().getResource("/_ressources/usa-left.png")).getImage());
 						a1.setLocation(a1.getX() - step, a1.getY());
 						p.setPosY(a1.getY());
 						p.setPosX(a1.getX()-step);
