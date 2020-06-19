@@ -35,14 +35,13 @@ public class CdaFenetre extends JFrame {
 		
 		this.setLayout(new BorderLayout());
 
+		lireScores();
 		this.getContentPane().add(new HautPanel(), BorderLayout.NORTH);
 		this.getContentPane().add(new CentrePanel(), BorderLayout.CENTER);
 		this.getContentPane().add(new BasPanel(), BorderLayout.SOUTH);
 
 		this.setVisible(true);
 		
-		lireScores();
-		ecrireScores();
 		
 	}
 	
@@ -103,7 +102,7 @@ public class CdaFenetre extends JFrame {
 		}
 	}
 	
-	public void ecrireScores() {
+	public static void ecrireScores() {
 		try {
 			FileWriter mfw = new FileWriter(listeScore.getAbsoluteFile());
 			SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy hh:mm");

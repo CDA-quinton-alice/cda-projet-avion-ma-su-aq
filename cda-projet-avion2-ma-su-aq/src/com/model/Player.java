@@ -97,6 +97,7 @@ public class Player {
 	}
 	
 	public static void menuEnd() {
+		CdaFenetre.ecrireScores();
 		JOptionPane d = new JOptionPane();
 		String lesTextes[] = {"Recommencer","Voir les scores","Quitter"};
 		int retour = d.showOptionDialog(null,"Vous avez perdu", "Avion v2", JOptionPane.DEFAULT_OPTION, JOptionPane.QUESTION_MESSAGE,null,lesTextes,lesTextes[0]);
@@ -117,7 +118,7 @@ public class Player {
 			JDialog jd = new JDialog();
 			
 			for(String s : CdaFenetre.getScores()) {
-				String str = s.split(";")[0]+" "+s.split(";")[1]+s.split(";")[2];
+				String str = s.split(";")[0]+"       "+s.split(";")[1]+"       "+s.split(";")[2];
 				panel.add(new JLabel(str));
 			}
 			

@@ -14,6 +14,7 @@ import com.model.MeteoriteDeFeu;
 import com.model.MeteoriteDeGlace;
 import com.model.MeteoriteSimple;
 import com.model.MeteoriteZigZag;
+import com.model.Player;
 
 public class MeteoritePanel extends JPanel implements IMeteorite {
 
@@ -74,7 +75,6 @@ public class MeteoritePanel extends JPanel implements IMeteorite {
 
 	public void randomMeteorite() {
 		EnumMeteor nm = ControllerMeteor.randomMeteor();
-		System.out.println(nm);
 		switch (nm) {
 		case NORMALE:
 			this.icoMS = new ImageIcon(getClass().getResource("/_ressources/ms.gif"));
@@ -108,6 +108,7 @@ public class MeteoritePanel extends JPanel implements IMeteorite {
 			break;
 		}
 
+		Player.addPoints(m);
 		this.setLocation(new Random().nextInt(CentrePanel.getLargeur() - this.getWidth() - 10), this.getY());
 	}
 
@@ -121,7 +122,9 @@ public class MeteoritePanel extends JPanel implements IMeteorite {
 		int i = vRandom.nextInt(CentrePanel.getLargeur() - this.getWidth() - 10) + 10;
 		int j = vRandom.nextInt(75);
 		this.setLocation(i, 0 - j);
+		Player.addPoints(m);
 		this.randomMeteorite();
+		
 		
 	}
 
