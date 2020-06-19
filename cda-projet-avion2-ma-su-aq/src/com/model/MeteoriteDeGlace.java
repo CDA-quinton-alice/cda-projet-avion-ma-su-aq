@@ -23,8 +23,6 @@ public class MeteoriteDeGlace extends Meteorite {
 	
 	public MeteoriteDeGlace(int pPositionX, int pPositionY) {
 		super("GLACE", 2, 10, pPositionX, pPositionY, 75, 75);
-		this.icoMG = new ImageIcon(getClass().getResource("/_ressources/meteoroideGlaceCutCourtetRotateSansFond.gif"));
-		this.imgMG = this.icoMG.getImage();
 	}
 	@Override
 	public void move() {

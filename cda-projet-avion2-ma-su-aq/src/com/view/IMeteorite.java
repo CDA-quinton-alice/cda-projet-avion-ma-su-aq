@@ -21,4 +21,6 @@ public interface IMeteorite {
 	void reset();
 
 	void repaint();
+
+	void move();
 }

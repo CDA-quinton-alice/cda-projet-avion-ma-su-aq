@@ -28,26 +28,6 @@ public abstract class Meteorite {
 		this.largeur = pLargeur;
 		this.hauteur = pHauteur;
 
-		switch (pNom) {
-		case "SIMPLE":
-			this.icoM = new ImageIcon(getClass().getResource("/_ressources/ms.gif"));
-			this.imgM = this.icoM.getImage();
-			break;
-
-		case "FEU":
-			this.icoM = new ImageIcon(getClass().getResource("/_ressources/meteoroideDeFeuSansFond.gif"));
-			this.imgM = this.icoM.getImage();
-			break;
-
-		case "GLACE":
-			this.icoM = new ImageIcon(getClass().getResource("/_ressources/meteoroideGlaceCutCourtetRotateSansFond.gif"));
-			this.imgM = this.icoM.getImage();
-			break;
-			
-		default:
-			break;
-		}
-
 	}
 
 	public abstract void move();

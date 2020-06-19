@@ -55,4 +55,10 @@ public class MeteoriteSimplePanel extends JPanel implements IMeteorite{
 		super.paintComponent(g);
 		g.drawImage(this.imgMS, 0, 0, null);
 	}
+
+	@Override
+	public void move() {
+		// TODO Auto-generated method stub
+		
+	}
 }

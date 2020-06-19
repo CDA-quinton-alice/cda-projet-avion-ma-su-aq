@@ -54,8 +54,13 @@ public class MeteoriteFeuPanel extends JPanel implements IMeteorite{
 		g.drawImage(this.imgMS, 0, 0, null);
 	}
 
-	@Override
 	public MeteoriteDeFeu getM() {
 		return this.m;
+	}
+
+	@Override
+	public void move() {
+		// TODO Auto-generated method stub
+		
 	}
 }

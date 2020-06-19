@@ -50,17 +50,16 @@ public class CentrePanel extends JPanel {
 		Random vRandom = new Random();
 
 		//Il me faut un type commun à tous les pannels, interface vide ?
-		m1 = new MeteoriteSimplePanel(5);
-		
+		m1 = new MeteoritePanel(5);
 		this.add((JPanel)m1);
 
-		m2 = new MeteoriteFeuPanel(2);
+		m2 = new MeteoritePanel(2);
 		this.add((JPanel)m2);
 
-		m3 = new MeteoriteSimplePanel(4);
+		m3 = new MeteoritePanel(4);
 		this.add((JPanel)m3);
 
-		m4 = new MeteoriteSimplePanel(3);
+		m4 = new MeteoritePanel(3);
 		this.add((JPanel)m4);
 
 		AvionPanel a1 = new AvionPanel();
@@ -71,53 +70,28 @@ public class CentrePanel extends JPanel {
 		a1.setFocusable(true);
 
 		listThreads.add(new Thread(new Runnable() {
-			//ici gérer avec instanceof le type choisis par le random de la classe metéore
-			//et instancier en fonction
-			//gros copier coller moche sur les autres threads
 			public void run() {
 				while (true) {
-					System.out.println(m1.getY()>heigth-m1.getVitesseDeplacement());
 					if(m1.getY()>heigth-m1.getVitesseDeplacement()) {
-						System.out.println("test");
-//						EnumMeteor em = ControllerMeteor.randomMeteor();
-//						switch(em) {
-//						case NORMALE:
-//							System.out.println("NORMAL");
-//							m1 = new MeteoriteSimplePanel(new Random().nextInt(5));
-//							break;
-//						case FEU:
-//							System.out.println("FEU");
-//							m1 = new MeteoriteFeuPanel(new Random().nextInt(5));
-//							break;
-//						case ICE:
-//							System.out.println("ICE");
-//							m1 = new MeteoriteFeuPanel(new Random().nextInt(5));
-//							break;
-//						case GLACE:
-//							System.out.println("GLACE");
-//							m1 = new MeteoriteFeuPanel(new Random().nextInt(5));
-//							break;
-//						case ZIGZAG:
-//							System.out.println("ZIGZAG");
-//							m1 = new MeteoriteFeuPanel(new Random().nextInt(5));
-//							break;
-//						}
+						if(m1 instanceof MeteoritePanel) {
+							((MeteoritePanel)m1).randomMeteorite();
+						}
 					}
-					m1.setLocation(m1.getX(), (m1.getY() + m1.getVitesseDeplacement()) % heigth);
+					m1.move();
 					if (sontEnCollision(m1, a1)) {
 						Meteorite mm1 = (Meteorite) m1.getM();
 						Player.isHit(mm1.getDegat());
-						m1.reset();
 						a1.setImgAvion(new ImageIcon(getClass().getResource("/_ressources/explosion.gif")).getImage());
+						m1.reset();
 					}
-
 					m1.repaint();
-					 
 					try {
 						Thread.sleep(20);
 					} catch (InterruptedException e) {
 						e.printStackTrace();
 					}
+
+					
 				}
 			}
 		}));
@@ -125,20 +99,26 @@ public class CentrePanel extends JPanel {
 		listThreads.add(new Thread(new Runnable() {
 			public void run() {
 				while (true) {
-					m2.setLocation(m2.getX(), (m2.getY() + m2.getVitesseDeplacement()) % heigth);
-					if (sontEnCollision(m2, a1)) {
-						Meteorite mm2 = (Meteorite) m2.getM();
-						Player.isHit(mm2.getDegat());
-						m2.reset();
-						a1.setIcoAvion(new ImageIcon(getClass().getResource("/_ressources/explosion.gif")));
+					if(m2.getY()>heigth-m2.getVitesseDeplacement()) {
+						if(m2 instanceof MeteoritePanel) {
+							((MeteoritePanel)m2).randomMeteorite();
+						}
 					}
-
+					m2.move();
+					if (sontEnCollision(m2, a1)) {
+						Meteorite mm2 = (Meteorite) m1.getM();
+						Player.isHit(mm2.getDegat());
+						a1.setImgAvion(new ImageIcon(getClass().getResource("/_ressources/explosion.gif")).getImage());
+						m2.reset();
+					}
 					m2.repaint();
 					try {
 						Thread.sleep(20);
 					} catch (InterruptedException e) {
 						e.printStackTrace();
 					}
+
+					
 				}
 			}
 		}));
@@ -146,7 +126,12 @@ public class CentrePanel extends JPanel {
 		listThreads.add(new Thread(new Runnable() {
 			public void run() {
 				while (true) {
-					m3.setLocation(m3.getX(), (m3.getY() + m3.getVitesseDeplacement()) % heigth);
+					if(m3.getY()>heigth-m1.getVitesseDeplacement()) {
+						if(m3 instanceof MeteoritePanel) {
+							((MeteoritePanel)m3).randomMeteorite();
+						}
+					}
+					m3.move();
 					if (sontEnCollision(m3, a1)) {
 						Meteorite mm3 = (Meteorite) m3.getM();
 						Player.isHit(mm3.getDegat());
@@ -159,26 +144,35 @@ public class CentrePanel extends JPanel {
 					} catch (InterruptedException e) {
 						e.printStackTrace();
 					}
+
+					
 				}
 			}
 		}));
-
+//
 		listThreads.add(new Thread(new Runnable() {
 			public void run() {
 				while (true) {
-					m4.setLocation(m4.getX(), (m4.getY() + m4.getVitesseDeplacement()) % heigth);
+					if(m4.getY()>heigth-m4.getVitesseDeplacement()) {
+						if(m1 instanceof MeteoritePanel) {
+							((MeteoritePanel)m4).randomMeteorite();
+						}
+					}
+					m4.move();
 					if (sontEnCollision(m4, a1)) {
 						Meteorite mm4 = (Meteorite) m4.getM();
 						Player.isHit(mm4.getDegat());
-						a1.setImgAvion(new ImageIcon(getClass().getResource("/_ressources/explosion.gif")).getImage());	
 						m4.reset();
+						a1.setImgAvion(new ImageIcon(getClass().getResource("/_ressources/explosion.gif")).getImage());
 					}
 					m4.repaint();
 					try {
-						Thread.sleep(40);
+						Thread.sleep(20);
 					} catch (InterruptedException e) {
 						e.printStackTrace();
 					}
+
+					
 				}
 			}
 		}));
@@ -189,7 +183,7 @@ public class CentrePanel extends JPanel {
 			@Override
 			public void keyPressed(KeyEvent e) {
 				Player p = Player.getInstance();
-				int step = 5;
+				int step = 10;
 				
 				if(p.isAlive()) {
 					if (e.getKeyCode() == KeyEvent.VK_UP && a1.getY() > 0) {
