@@ -34,11 +34,16 @@ public class ObservablePoints extends Observable{
 			points += 3;
 		}else if(m instanceof MeteoriteDeFeu) {
 			points += 1;
+		}else if(m instanceof MeteoriteIceberg) {
+			points += 5;
+		}else if(m instanceof MeteoriteZigZag) {
+			points += 5;
 		}
 		
 		if(points >= 999) {
 			points = 999;
 		}
+		
 		setChanged();
 		notifyObservers();
 	}

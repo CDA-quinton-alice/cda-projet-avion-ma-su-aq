@@ -20,7 +20,7 @@ public class MeteoriteIceberg extends Meteorite {
 	private Image imgMI;
 	
 	public MeteoriteIceberg(int pPositionX, int pPositionY) {
-		super("ICE", 4, 10, pPositionX, pPositionY, 150, 75);
+		super("ICE", 2, 10, pPositionX, pPositionY, 150, 75);
 		this.icoMI = new ImageIcon(getClass().getResource("/_ressources/iceberg.gif"));
 		this.icoMI.getImage();
 		

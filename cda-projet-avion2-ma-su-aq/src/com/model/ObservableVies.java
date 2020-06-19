@@ -11,6 +11,7 @@ import com.view.ViewVies;
 public class ObservableVies extends Observable implements ActionListener{
 	private int vies;
 	private boolean hit = false;
+	private boolean menu = true;
 	
 	public ObservableVies() {
 		addObserver(ViewVies.getInstance());
@@ -21,16 +22,22 @@ public class ObservableVies extends Observable implements ActionListener{
 	}
 	
 	public void getHit(int i) {
-		if(vies<0) {
-			Player.setAlive(false);
-			vies = 0;
-		}
+		
 		if(!hit) {
 			vies -= i;
 			this.hit = true;
+			if(vies<0) {
+				vies = 0;
+			}
 		}
 		setChanged();
 		notifyObservers();
+		if(vies<=0 && menu) {
+			Player.setAlive(false);
+			Player.menuEnd();
+			vies = 0;
+			menu = false;
+		}
 	}
 	
 	public void reset() {

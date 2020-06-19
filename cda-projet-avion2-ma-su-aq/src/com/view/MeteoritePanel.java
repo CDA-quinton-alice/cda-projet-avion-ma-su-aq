@@ -138,7 +138,7 @@ public class MeteoritePanel extends JPanel implements IMeteorite {
 	public void move() {
 		if(m instanceof MeteoriteZigZag) {
 			if(zag) {
-				if(nbZag>=10) {
+				if(nbZag>=15) {
 					zag = false;
 					nbZag = 0;
 				}else {
@@ -146,7 +146,7 @@ public class MeteoritePanel extends JPanel implements IMeteorite {
 					nbZag++;
 				}
 			}else {
-				if(nbZag>=10) {
+				if(nbZag>=15) {
 					zag = true;
 					nbZag = 0;
 				}else {
