@@ -21,12 +21,16 @@ public class ObservableVies extends Observable implements ActionListener{
 	}
 	
 	public void getHit(int i) {
+		if(vies<0) {
+			Player.setAlive(false);
+			vies = 0;
+		}
 		if(!hit) {
 			vies -= i;
 			this.hit = true;
-			setChanged();
-			notifyObservers();
 		}
+		setChanged();
+		notifyObservers();
 	}
 	
 	public void reset() {

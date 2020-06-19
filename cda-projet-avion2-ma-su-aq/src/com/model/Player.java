@@ -92,7 +92,6 @@ public class Player {
 	public static void isHit(int i) {
 		vies.getHit(i);
 		if(vies.isDead()) {
-			menuEnd();
 			setAlive(false);			
 		}
 	}

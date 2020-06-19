@@ -14,6 +14,8 @@ import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
 import com.controller.Collision;
+import com.controller.ControllerMeteor;
+import com.controller.ControllerMeteor.EnumMeteor;
 import com.model.Meteorite;
 import com.model.Player;
 
@@ -29,6 +31,12 @@ public class CentrePanel extends JPanel {
 	private static List<Thread> listThreads;
 	private static boolean restart = false;
 	
+	IMeteorite m1;
+	IMeteorite m2;
+	IMeteorite m3;
+	IMeteorite m4;
+	
+	
 	public CentrePanel() {
 		listThreads = new ArrayList<>();
 //		this.setBackground(Color.BLACK);
@@ -42,17 +50,17 @@ public class CentrePanel extends JPanel {
 		Random vRandom = new Random();
 
 		//Il me faut un type commun à tous les pannels, interface vide ?
-		IMeteorite m1 = new MeteoriteSimplePanel(5);
+		m1 = new MeteoriteSimplePanel(5);
 		
 		this.add((JPanel)m1);
 
-		IMeteorite m2 = new MeteoriteFeuPanel(2);
+		m2 = new MeteoriteFeuPanel(2);
 		this.add((JPanel)m2);
 
-		IMeteorite m3 = new MeteoriteSimplePanel(4);
+		m3 = new MeteoriteSimplePanel(4);
 		this.add((JPanel)m3);
 
-		IMeteorite m4 = new MeteoriteSimplePanel(3);
+		m4 = new MeteoriteSimplePanel(3);
 		this.add((JPanel)m4);
 
 		AvionPanel a1 = new AvionPanel();
@@ -68,6 +76,32 @@ public class CentrePanel extends JPanel {
 			//gros copier coller moche sur les autres threads
 			public void run() {
 				while (true) {
+					if(m1.getY()>heigth-m1.getVitesseDeplacement()) {
+						EnumMeteor em = ControllerMeteor.randomMeteor();
+						switch(em) {
+						case NORMALE:
+							System.out.println("NORMAL");
+							m1 = new MeteoriteSimplePanel(new Random().nextInt(5));
+							break;
+						case FEU:
+							System.out.println("FEU");
+							m1 = new MeteoriteFeuPanel(new Random().nextInt(5));
+							break;
+						case ICE:
+							System.out.println("ICE");
+							m1 = new MeteoriteFeuPanel(new Random().nextInt(5));
+							break;
+						case GLACE:
+							System.out.println("GLACE");
+							m1 = new MeteoriteFeuPanel(new Random().nextInt(5));
+							break;
+						case ZIGZAG:
+							System.out.println("ZIGZAG");
+							m1 = new MeteoriteFeuPanel(new Random().nextInt(5));
+							break;
+						}
+						m1.repaint();
+					}
 					m1.setLocation(m1.getX(), (m1.getY() + m1.getVitesseDeplacement()) % heigth);
 					if (sontEnCollision(m1, a1)) {
 						Meteorite mm1 = (Meteorite) m1.getM();
@@ -77,6 +111,7 @@ public class CentrePanel extends JPanel {
 					}
 
 					m1.repaint();
+					 
 					try {
 						Thread.sleep(20);
 					} catch (InterruptedException e) {
@@ -96,8 +131,7 @@ public class CentrePanel extends JPanel {
 						m2.reset();
 						a1.setIcoAvion(new ImageIcon(getClass().getResource("/_ressources/explosion.gif")));
 					}
-					
-					
+
 					m2.repaint();
 					try {
 						Thread.sleep(20);
@@ -156,26 +190,30 @@ public class CentrePanel extends JPanel {
 				Player p = Player.getInstance();
 				int step = 5;
 				
-				if (e.getKeyCode() == KeyEvent.VK_UP && a1.getY() > 0) {
-					a1.setImgAvion(new ImageIcon(getClass().getResource("/_ressources/usa.png")).getImage());
-					a1.setLocation(a1.getX(), a1.getY() - step);
-					p.setPosY(a1.getY()-step);
-					p.setPosX(a1.getX());
-				} else if (e.getKeyCode() == KeyEvent.VK_DOWN && a1.getY() < 800 - a1.getHeight()) {
-					a1.setImgAvion(new ImageIcon(getClass().getResource("/_ressources/usa-Back.png")).getImage());
-					a1.setLocation(a1.getX(), a1.getY() + step);
-					p.setPosY(a1.getY()+step);
-					p.setPosX(a1.getX());
-				} else if (e.getKeyCode() == KeyEvent.VK_RIGHT && a1.getX() < 580 - a1.getWidth()) {
-					a1.setImgAvion(new ImageIcon(getClass().getResource("/_ressources/usa32-R.png")).getImage());
-					a1.setLocation(a1.getX() + step, a1.getY());
-					p.setPosY(a1.getY());
-					p.setPosX(a1.getX()+step);
-				} else if (e.getKeyCode() == KeyEvent.VK_LEFT && a1.getX() > 0) {
-					a1.setImgAvion(new ImageIcon(getClass().getResource("/_ressources/usa32-L.png")).getImage());
-					a1.setLocation(a1.getX() - step, a1.getY());
-					p.setPosY(a1.getY());
-					p.setPosX(a1.getX()-step);
+				if(p.isAlive()) {
+					if (e.getKeyCode() == KeyEvent.VK_UP && a1.getY() > 0) {
+						a1.setImgAvion(new ImageIcon(getClass().getResource("/_ressources/usa.png")).getImage());
+						a1.setLocation(a1.getX(), a1.getY() - step);
+						p.setPosY(a1.getY()-step);
+						p.setPosX(a1.getX());
+					} else if (e.getKeyCode() == KeyEvent.VK_DOWN && a1.getY() < 800 - a1.getHeight()) {
+						a1.setImgAvion(new ImageIcon(getClass().getResource("/_ressources/usa-Back.png")).getImage());
+						a1.setLocation(a1.getX(), a1.getY() + step);
+						p.setPosY(a1.getY()+step);
+						p.setPosX(a1.getX());
+					} else if (e.getKeyCode() == KeyEvent.VK_RIGHT && a1.getX() < 580 - a1.getWidth()) {
+						a1.setImgAvion(new ImageIcon(getClass().getResource("/_ressources/usa32-R.png")).getImage());
+						a1.setLocation(a1.getX() + step, a1.getY());
+						p.setPosY(a1.getY());
+						p.setPosX(a1.getX()+step);
+					} else if (e.getKeyCode() == KeyEvent.VK_LEFT && a1.getX() > 0) {
+						a1.setImgAvion(new ImageIcon(getClass().getResource("/_ressources/usa32-L.png")).getImage());
+						a1.setLocation(a1.getX() - step, a1.getY());
+						p.setPosY(a1.getY());
+						p.setPosX(a1.getX()-step);
+					}
+				}else {
+					Player.menuEnd();
 				}
 			}
 		});
