@@ -1,4 +1,4 @@
-package com.model;
+package com.view;
 
 public class Program {
 
