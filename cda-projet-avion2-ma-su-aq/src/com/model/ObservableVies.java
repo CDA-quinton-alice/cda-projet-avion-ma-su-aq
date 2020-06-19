@@ -18,6 +18,11 @@ public class ObservableVies extends Observable{
 		notifyObservers();
 	}
 	
+	public void reset() {
+		vies = 5;
+		setChanged();
+		notifyObservers();
+	}
 	public int getVies() {
 		return vies;
 	}

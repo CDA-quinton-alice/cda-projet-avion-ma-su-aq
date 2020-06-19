@@ -42,6 +42,14 @@ public class MeteoriteSimplePanel extends JPanel {
 		return this.m;
 	}
 	
+	public void reset() {
+		Random vRandom = new Random();
+		int i = vRandom.nextInt(CentrePanel.getLargeur() - this.getWidth() - 10) + 10;
+		int j = vRandom.nextInt(75);
+		this.setLocation(i, 0-j);
+		m = new MeteoriteSimple(i,0-j);
+	}
+	
 	@Override
 	protected void paintComponent(Graphics g) {
 		super.paintComponent(g);

@@ -5,9 +5,12 @@ import java.awt.Image;
 import java.awt.Point;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Random;
 
 import javax.swing.ImageIcon;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
 import com.controller.Collision;
@@ -22,8 +25,11 @@ public class CentrePanel extends JPanel {
 	private Image imgFond;
 	public int xFond;
 	private final int HAUTEUR_FOND = 217;
-
+	private static List<Thread> listThreads;
+	private static boolean restart = false;
+	
 	public CentrePanel() {
+		listThreads = new ArrayList<>();
 //		this.setBackground(Color.BLACK);
 		this.setLayout(null);
 //		this.setOpaque(false);
@@ -52,13 +58,16 @@ public class CentrePanel extends JPanel {
 
 		a1.setFocusable(true);
 
-		new Thread(new Runnable() {
+		listThreads.add(new Thread(new Runnable() {
 			public void run() {
 				while (true) {
 					m1.setLocation(m1.getX(), (m1.getY() + m1.getVitesseDeplacement()) % heigth);
 					if (sontEnCollision(m1, a1)) {
 						Player.isHit(m1.getM().getDegat());
 						Player.addPoints(m1.getM());
+						if(!Player.isAlive()) {
+							m1.reset();
+						}
 						a1.setImgAvion(new ImageIcon(getClass().getResource("/_ressources/explosion.gif")).getImage());
 					}
 
@@ -70,15 +79,17 @@ public class CentrePanel extends JPanel {
 					}
 				}
 			}
-		}).start();
+		}));
 
-		new Thread(new Runnable() {
+		listThreads.add(new Thread(new Runnable() {
 			public void run() {
 				while (true) {
 					m2.setLocation(m2.getX(), (m2.getY() + m2.getVitesseDeplacement()) % heigth);
 //					if (sontEnCollision(m2, a1)) {
-//					a1.setIcoAvion(new ImageIcon(getClass().getResource("/_ressources/explosion.gif")));
-//				}
+//						a1.setIcoAvion(new ImageIcon(getClass().getResource("/_ressources/explosion.gif")));
+//					}
+					
+					
 					m2.repaint();
 					try {
 						Thread.sleep(20);
@@ -87,15 +98,19 @@ public class CentrePanel extends JPanel {
 					}
 				}
 			}
-		}).start();
+		}));
 
-		new Thread(new Runnable() {
+		listThreads.add(new Thread(new Runnable() {
 			public void run() {
 				while (true) {
 					m3.setLocation(m3.getX(), (m3.getY() + m3.getVitesseDeplacement()) % heigth);
 					if (sontEnCollision(m3, a1)) {
 						Player.isHit(m1.getM().getDegat());
 						Player.addPoints(m1.getM());
+
+						if(!Player.isAlive()) {
+							m3.reset();
+						}
 						a1.setImgAvion(new ImageIcon(getClass().getResource("/_ressources/explosion.gif")).getImage());
 					}
 					m3.repaint();
@@ -106,9 +121,9 @@ public class CentrePanel extends JPanel {
 					}
 				}
 			}
-		}).start();
+		}));
 
-		new Thread(new Runnable() {
+		listThreads.add(new Thread(new Runnable() {
 			public void run() {
 				while (true) {
 					m4.setLocation(m4.getX(), (m4.getY() + m4.getVitesseDeplacement()) % heigth);
@@ -116,6 +131,10 @@ public class CentrePanel extends JPanel {
 						Player.isHit(m1.getM().getDegat());
 						Player.addPoints(m1.getM());
 						a1.setImgAvion(new ImageIcon(getClass().getResource("/_ressources/explosion.gif")).getImage());
+
+						if(!Player.isAlive()) {
+							m4.reset();
+						}
 						//Arrêter --> pop up fin game
 					}
 					m4.repaint();
@@ -126,13 +145,16 @@ public class CentrePanel extends JPanel {
 					}
 				}
 			}
-		}).start();
+		}));
+		
+		listThreads.stream().forEach(x-> ((Thread)x).start());
 
 		a1.addKeyListener(new KeyAdapter() {
 			@Override
 			public void keyPressed(KeyEvent e) {
 				Player p = Player.getInstance();
 				int step = 5;
+				
 				if (e.getKeyCode() == KeyEvent.VK_UP && a1.getY() > 0) {
 					a1.setImgAvion(new ImageIcon(getClass().getResource("/_ressources/usa.png")).getImage());
 					a1.setLocation(a1.getX(), a1.getY() - step);
@@ -167,6 +189,14 @@ public class CentrePanel extends JPanel {
 		return width;
 	}
 
+	public static void reset() {
+		restart = true;
+	}
+
+	public static List<Thread> getListThreads() {
+		return listThreads;
+	}
+
 	private static boolean sontEnCollision(MeteoriteSimplePanel pMeteorite, AvionPanel pAvion) {
 		Point mA = new Point(pMeteorite.getX(), pMeteorite.getY());
 		Point mB = new Point(pMeteorite.getX() + pMeteorite.getWidth(), pMeteorite.getY());
@@ -177,7 +207,9 @@ public class CentrePanel extends JPanel {
 		Point aB = new Point(pAvion.getX() + pAvion.getWidth(), pAvion.getY());
 		Point aC = new Point(pAvion.getX() + pAvion.getWidth(), pAvion.getY() + pAvion.getHeight());
 		Point aD = new Point(pAvion.getX(), pAvion.getY() + pAvion.getHeight());
-
+		
+		
+		
 		return (mC.getX() < aB.getX() && mC.getX() > aA.getX() && mC.getY() > aA.getY() && mC.getY() < aD.getY())
 				|| (mD.getX() < aB.getX() && mD.getX() > aA.getX() && mD.getY() > aA.getY() && mD.getY() < aD.getY());
 	}

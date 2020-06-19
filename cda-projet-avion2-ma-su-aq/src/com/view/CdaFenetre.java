@@ -18,8 +18,9 @@ import com.model.Player;
 public class CdaFenetre extends JFrame {
 
 	private File listeScore;
+	private static CdaFenetre INSTANCE;
 	
-	public CdaFenetre() {
+	private CdaFenetre() {
 		setupFichierScore();
 		demanderNom();
 		
@@ -39,6 +40,15 @@ public class CdaFenetre extends JFrame {
 		this.setVisible(true);
 		
 		ecrireScores();
+		
+	}
+	
+	
+	public static CdaFenetre getInstance() {
+		if(INSTANCE == null) {
+			INSTANCE = new CdaFenetre();
+		}
+		return INSTANCE;
 	}
 	
 	private void setupFichierScore(){
@@ -58,12 +68,11 @@ public class CdaFenetre extends JFrame {
 				}else {
 					score.createNewFile();
 					listeScore = score;
+					FileWriter myWriter = new FileWriter(listeScore.getAbsoluteFile());
+					myWriter.flush();
+					myWriter.write("Liste des scores ");
+					myWriter.close();
 				}
-				
-				FileWriter myWriter = new FileWriter(listeScore.getAbsoluteFile());
-				myWriter.flush();
-				myWriter.write("Liste des scores ");
-				myWriter.close();
 				
 			}
 		}catch(IOException e) {

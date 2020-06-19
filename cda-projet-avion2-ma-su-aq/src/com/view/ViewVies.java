@@ -24,7 +24,6 @@ public class ViewVies extends JLabel implements Observer{
 		}
 		return INSTANCE;
 	}
-	
 
 	@Override
 	public void update(Observable o, Object arg) {

@@ -5,6 +5,10 @@ import java.awt.Rectangle;
 import java.io.IOException;
 import java.net.URL;
 import javax.imageio.ImageIO;
+import javax.swing.JOptionPane;
+
+import com.view.CdaFenetre;
+import com.view.CentrePanel;
 
 public class Player {
 	private static String name;
@@ -73,11 +77,27 @@ public class Player {
 		vies.getHit(i);
 		if(vies.isDead()) {
 			setAlive(false);
+			JOptionPane d = new JOptionPane();
+			String lesTextes[] = {"Recommencer","Voir les scores","Quitter"};
+			int retour = d.showOptionDialog(null,"Vous avez perdu", "Avion v2", JOptionPane.DEFAULT_OPTION, JOptionPane.ERROR_MESSAGE,null,lesTextes,lesTextes[0]);
+			
+			if(retour == 0) {
+				reset();
+			}else if(retour == 1) {
+				//Voir les scores
+				
+			}else {
+				System.exit(0);
+			}
 		}
 	}
 	
+	public static void reset() {
+		vies.reset();
+		points.reset();
+	}
+	
 	public static void addPoints(Meteorite m) {
-		System.out.println("DES POINTS !");
 		points.addPoints(m);
 	}
 	

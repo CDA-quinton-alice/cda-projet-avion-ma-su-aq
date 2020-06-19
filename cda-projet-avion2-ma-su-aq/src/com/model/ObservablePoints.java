@@ -21,6 +21,12 @@ public class ObservablePoints extends Observable{
 		return this.points;
 	}
 	
+	public void reset() {
+		this.points = 0;
+		setChanged();
+		notifyObservers();
+	}
+	
 	public void addPoints(Meteorite m) {
 		if(m instanceof MeteoriteSimple) {
 			points += 2;
