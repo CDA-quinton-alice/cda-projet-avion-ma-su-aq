@@ -10,6 +10,9 @@ import java.util.Random;
 import javax.swing.ImageIcon;
 import javax.swing.JPanel;
 
+import com.controller.Collision;
+import com.model.Player;
+
 public class CentrePanel extends JPanel {
 
 	private static int width = 600;
@@ -32,19 +35,15 @@ public class CentrePanel extends JPanel {
 		Random vRandom = new Random();
 
 		MeteoriteSimplePanel m1 = new MeteoriteSimplePanel(5);
-		m1.setLocation(vRandom.nextInt(width - m1.getWidth() - 10) + 10, -1);
 		this.add(m1);
 
 		MeteoriteFeuPanel m2 = new MeteoriteFeuPanel(2);
-		m2.setLocation(vRandom.nextInt(width - m2.getWidth() - 10) + 10, -1);
 		this.add(m2);
 
 		MeteoriteSimplePanel m3 = new MeteoriteSimplePanel(4);
-		m1.setLocation(vRandom.nextInt(width - m1.getWidth() - 10) + 10, -75);
 		this.add(m3);
 
 		MeteoriteSimplePanel m4 = new MeteoriteSimplePanel(3);
-		m4.setLocation(vRandom.nextInt(width - m4.getWidth() - 10) + 10, -75);
 		this.add(m4);
 
 		AvionPanel a1 = new AvionPanel();
@@ -58,6 +57,8 @@ public class CentrePanel extends JPanel {
 				while (true) {
 					m1.setLocation(m1.getX(), (m1.getY() + m1.getVitesseDeplacement()) % heigth);
 					if (sontEnCollision(m1, a1)) {
+						Player.isHit(m1.getM().getDegat());
+						Player.addPoints(m1.getM());
 						a1.setImgAvion(new ImageIcon(getClass().getResource("/_ressources/explosion.gif")).getImage());
 					}
 
@@ -93,6 +94,8 @@ public class CentrePanel extends JPanel {
 				while (true) {
 					m3.setLocation(m3.getX(), (m3.getY() + m3.getVitesseDeplacement()) % heigth);
 					if (sontEnCollision(m3, a1)) {
+						Player.isHit(m1.getM().getDegat());
+						Player.addPoints(m1.getM());
 						a1.setImgAvion(new ImageIcon(getClass().getResource("/_ressources/explosion.gif")).getImage());
 					}
 					m3.repaint();
@@ -110,6 +113,8 @@ public class CentrePanel extends JPanel {
 				while (true) {
 					m4.setLocation(m4.getX(), (m4.getY() + m4.getVitesseDeplacement()) % heigth);
 					if (sontEnCollision(m4, a1)) {
+						Player.isHit(m1.getM().getDegat());
+						Player.addPoints(m1.getM());
 						a1.setImgAvion(new ImageIcon(getClass().getResource("/_ressources/explosion.gif")).getImage());
 						//Arrêter --> pop up fin game
 					}
@@ -126,23 +131,40 @@ public class CentrePanel extends JPanel {
 		a1.addKeyListener(new KeyAdapter() {
 			@Override
 			public void keyPressed(KeyEvent e) {
+				Player p = Player.getInstance();
 				int step = 5;
 				if (e.getKeyCode() == KeyEvent.VK_UP && a1.getY() > 0) {
 					a1.setImgAvion(new ImageIcon(getClass().getResource("/_ressources/usa.png")).getImage());
 					a1.setLocation(a1.getX(), a1.getY() - step);
+					p.setPosY(a1.getY()-step);
+					p.setPosX(a1.getX());
 				} else if (e.getKeyCode() == KeyEvent.VK_DOWN && a1.getY() < 800 - a1.getHeight()) {
 					a1.setImgAvion(new ImageIcon(getClass().getResource("/_ressources/usa-Back.png")).getImage());
 					a1.setLocation(a1.getX(), a1.getY() + step);
+					p.setPosY(a1.getY()+step);
+					p.setPosX(a1.getX());
 				} else if (e.getKeyCode() == KeyEvent.VK_RIGHT && a1.getX() < 580 - a1.getWidth()) {
 					a1.setImgAvion(new ImageIcon(getClass().getResource("/_ressources/usa32-R.png")).getImage());
 					a1.setLocation(a1.getX() + step, a1.getY());
+					p.setPosY(a1.getY());
+					p.setPosX(a1.getX()+step);
 				} else if (e.getKeyCode() == KeyEvent.VK_LEFT && a1.getX() > 0) {
 					a1.setImgAvion(new ImageIcon(getClass().getResource("/_ressources/usa32-L.png")).getImage());
 					a1.setLocation(a1.getX() - step, a1.getY());
+					p.setPosY(a1.getY());
+					p.setPosX(a1.getX()-step);
 				}
 			}
 		});
 
+	}
+
+	public static int getHauteur() {
+		return heigth;
+	}
+
+	public static int getLargeur() {
+		return width;
 	}
 
 	private static boolean sontEnCollision(MeteoriteSimplePanel pMeteorite, AvionPanel pAvion) {

@@ -6,14 +6,14 @@ import com.model.Meteorite;
 import com.model.MeteoriteDeFeu;
 import com.model.MeteoriteDeGlace;
 import com.model.MeteoriteSimple;
+import com.view.ViewPoints;
 
-//import view.ViewPoints;
 
 public class ObservablePoints extends Observable{
 	private int points;
 	
 	public ObservablePoints() {
-		//addObserver(ViewPoints.getInstance());
+		addObserver(ViewPoints.getInstance());
 		this.points = 0;
 	}
 	

@@ -2,13 +2,13 @@ package com.model;
 
 import java.util.Observable;
 
-//import view.ViewVies;
+import com.view.ViewVies;
 
 public class ObservableVies extends Observable{
 	private int vies;
 	
 	public ObservableVies() {
-		//addObserver(ViewVies.getInstance());
+		addObserver(ViewVies.getInstance());
 		this.vies = 5;
 	}
 	
