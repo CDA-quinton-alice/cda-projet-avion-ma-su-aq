@@ -2,11 +2,16 @@ package com.view;
 
 import java.awt.BorderLayout;
 import java.awt.Image;
+import java.io.BufferedReader;
+import java.io.BufferedWriter;
 import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.net.URL;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
 
 import javax.imageio.ImageIO;
@@ -19,6 +24,7 @@ public class CdaFenetre extends JFrame {
 
 	private File listeScore;
 	private static CdaFenetre INSTANCE;
+	private ArrayList<String> scores;
 	
 	private CdaFenetre() {
 		setupFichierScore();
@@ -39,6 +45,7 @@ public class CdaFenetre extends JFrame {
 
 		this.setVisible(true);
 		
+		lireScores();
 		ecrireScores();
 		
 	}
@@ -52,6 +59,7 @@ public class CdaFenetre extends JFrame {
 	}
 	
 	private void setupFichierScore(){
+		scores = new ArrayList<>();
 		try {
 			String cTemp = System.getenv("temp");
 			if(cTemp.isEmpty()) {
@@ -70,7 +78,6 @@ public class CdaFenetre extends JFrame {
 					listeScore = score;
 					FileWriter myWriter = new FileWriter(listeScore.getAbsoluteFile());
 					myWriter.flush();
-					myWriter.write("Liste des scores ");
 					myWriter.close();
 				}
 				
@@ -81,16 +88,44 @@ public class CdaFenetre extends JFrame {
 		}
 	}
 	
+	public void lireScores() {
+		try {
+			BufferedReader r = new BufferedReader(new FileReader(listeScore.getAbsoluteFile()));
+			String str = r.readLine();
+			while(str != null){
+				scores.add(str);
+				str = r.readLine();
+			}
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
+	
 	public void ecrireScores() {
 		try {
-			FileWriter mfw = new FileWriter(listeScore.getAbsoluteFile(), true);
+			FileWriter mfw = new FileWriter(listeScore.getAbsoluteFile());
 			SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy hh:mm");
-			mfw.write("\n"+Player.getInstance().getName()+";"+Player.getInstance().getPoints().getPoints()+";"+sdf.format(new Date()));
+			if(scores.size()>=20) {
+				while(scores.size()>=20) {
+					scores.remove(0);
+				}
+			}
+			scores.add(Player.getInstance().getName()+";"+Player.getInstance().getPoints().getPoints()+";"+sdf.format(new Date()));
+			scores.stream().forEach((x)->{
+				try {
+					mfw.write("\n"+x);
+				} catch (IOException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+			});
 			mfw.close();
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
 	}
+	
 	
 	public void demanderNom() {
 		String nom = "";
